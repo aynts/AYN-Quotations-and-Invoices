@@ -1202,7 +1202,7 @@ tr.summary-row-grand td {
         </div>
         <div class="project-info">
           <h4>Project:</h4>
-          <textarea id="project-desc" class="input-project" placeholder="System description (e.g. 13kW Hybrid Solar System Installation for Residential / Commercial Property)..."></textarea>
+          <textarea id="project-desc" class="input-project" placeholder="7.38kWp / 8kW Hybrid Solar Energy Storage System Installation for Generic Residential Project"></textarea>
         </div>
       </div>
     </header>
@@ -1310,7 +1310,7 @@ let docInfo = {
   clientName: '',
   clientAddress: '',
   clientPhone: '',
-  projectDesc: ''
+  projectDesc: '7.38kWp / 8kW Hybrid Solar Energy Storage System Installation for Generic Residential Project'
 };
 
 let sections = [];
@@ -1514,26 +1514,26 @@ function updateFooterLabelsAndDefaults(forceReset = false) {
 
 function defaultData() {
   return [
-    { name: 'Material Price', items: [
-      { item:'Solar panel', desc:'Jinko / Aiko', spec:'615W', qty:12, unit:'Pcs', price:630000, remark:'10-12 Years Warranty', highlight:false },
-      { item:'PV Cable', desc:'TUV Solar Cable', spec:'4mm-sq', qty:30, unit:'Meter', price:12600, remark:'On Site Usage', highlight:true },
-      { item:'MC4 connector', desc:'IP68 Waterproof', spec:'1500V', qty:2, unit:'Set', price:8700, remark:'', highlight:false },
-      { item:'Solar Rack', desc:'Al & Stainless Steel', spec:'Roof Mount', qty:7380, unit:'Wp', price:0, remark:'On Site Usage', highlight:true },
-      { item:'Combiner Box', desc:'Aye Yeik Nyo Protection', spec:'DC/AC Protection', qty:1, unit:'pc', price:650000, remark:'Surge & Breaker Unit', highlight:false },
-      { item:'Inverter', desc:'Sandi / Deye Hybrid', spec:'13Kw', qty:1, unit:'pc', price:2800000, remark:'2-5 Years Warranty', highlight:false },
-      { item:'Battery', desc:'LiFePO4 Storage', spec:'51.2V/230Ah', qty:2, unit:'pc', price:6900000, remark:'3-5 Years Warranty', highlight:false },
-      { item:'Earth System', desc:'Copper Rod & Grounding', spec:'Standard Spec', qty:1, unit:'Lot', price:0, remark:'', highlight:false },
-      { item:'PVC & Accessories', desc:'Conduit, Trunking & Clips', spec:'Heavy Duty', qty:1, unit:'Lot', price:0, remark:'', highlight:false },
-      { item:'AC Work', desc:'ATS / Changeover & Breakers', spec:'Industrial Spec', qty:1, unit:'Lot', price:0, remark:'On Site Usage', highlight:true },
+    { name: 'Main Equipment & Inverter / Battery System', items: [
+      { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:12, unit:'Pcs', price:420000, remark:'10-12 Years Warranty', highlight:false },
+      { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi Hybrid', spec:'8kW Single / Three Phase', qty:1, unit:'Unit', price:5800000, remark:'3-5 Years Warranty', highlight:false },
+      { item:'Lithium Battery Storage', desc:'LiFePO4 Solar Energy Storage (Smart BMS)', spec:'51.2V 200Ah (10.24kWh)', qty:1, unit:'Unit', price:7500000, remark:'3-5 Years Warranty', highlight:false },
+      { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:650000, remark:'IP65 Waterproof Enclosure', highlight:false },
     ]},
-    { name: 'Installation Fee', items: [
-      { item:'Installation Fee', desc:'Professional Mounting & Wiring', spec:'Standard Spec', qty:7380, unit:'Wp', price:250, remark:'Certified Engineers', highlight:false },
+    { name: 'On-Site Usage Materials & BOS', items: [
+      { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:60, unit:'Meter', price:6500, remark:'Estimated On Site Usage', highlight:true },
+      { item:'MC4 Solar Connectors', desc:'IP68 Waterproof High Voltage Connectors', spec:'1500V DC / 30A', qty:6, unit:'Pairs', price:9500, remark:'Heavy Duty Weatherproof', highlight:false },
+      { item:'Solar Mounting Aluminum Rack', desc:'AL6005-T5 Aluminum Rails, Clamps & L-Feet', spec:'Roof Mount (7.38kWp Structure)', qty:1, unit:'Lot', price:680000, remark:'Estimated On Site Usage', highlight:true },
+      { item:'Earth Grounding System', desc:'Copper Rod (5/8 inch x 10ft) & Grounding Compound', spec:'16mm-sq Bare Earth Wire (< 5 Ohms)', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
+      { item:'uPVC Conduits & Accessories', desc:'Heavy Duty Conduits, Flexible Pipes & Trunking', spec:'Fire Retardant Class 8.5/13.5', qty:1, unit:'Lot', price:380000, remark:'Estimated On Site Usage', highlight:true },
+      { item:'AC Distribution & Changeover ATS', desc:'Automatic / Manual ATS (63A) & AC Cabling', spec:'Main DB Interlocking & Load Distribution', qty:1, unit:'Lot', price:520000, remark:'Estimated On Site Usage', highlight:true },
     ]},
-    { name: 'Consultant Fee', items: [
-      { item:'System Configuration', desc:'Testing, Commissioning & Handover', spec:'Full Setup', qty:1, unit:'Set', price:350000, remark:'Technical Inspection', highlight:false },
+    { name: 'Installation & Engineering Labor', items: [
+      { item:'Installation & Mounting Labor', desc:'Mechanical Mounting, DC/AC Wiring & Dressing', spec:'7.38kWp Residential System', qty:1, unit:'Lot', price:950000, remark:'Certified Engineering Team', highlight:false },
+      { item:'System Testing & Commissioning', desc:'Inverter Setup, Battery Balancing & Handover', spec:'Full Configuration & User Training', qty:1, unit:'Set', price:350000, remark:'Testing Inspection & 1-Year Free Service', highlight:false },
     ]},
-    { name: 'Others', items: [
-      { item:'Transportation fee', desc:'Site Logistics & Delivery', spec:'Door to Door', qty:1, unit:'Set', price:300000, remark:'Depend On Site Location', highlight:false },
+    { name: 'Logistics & Site Delivery', items: [
+      { item:'Transportation & Logistics', desc:'Site Logistics, Packaging & Equipment Handling', spec:'Mandalay & Surrounding Area', qty:1, unit:'Trip', price:250000, remark:'Depend On Site Location', highlight:false },
     ]},
   ];
 }
@@ -2044,7 +2044,7 @@ function clearDraft() {
       clientName: '', 
       clientAddress: '', 
       clientPhone: '', 
-      projectDesc: '' 
+      projectDesc: '7.38kWp / 8kW Hybrid Solar Energy Storage System Installation for Generic Residential Project' 
     };
     window._advance = 0;
     localStorage.removeItem('ayn_draft');
