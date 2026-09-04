@@ -1141,7 +1141,78 @@ tr.summary-row-grand td {
     background: transparent !important;
   }
 }
-  </style>
+  
+/* ========= PRESET TEMPLATE SWITCHER & TITLE ENHANCEMENTS ========= */
+.template-picker-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.04);
+}
+
+.template-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.select-preset {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0f172a;
+  background: #ffffff;
+  border: 1.5px solid #3b82f6;
+  border-radius: 6px;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.select-preset:hover, .select-preset:focus {
+  border-color: #1d4ed8;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+}
+
+.system-title-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  position: relative;
+}
+
+.btn-auto-title {
+  background: #f1f5f9;
+  border: 1px solid #94a3b8;
+  border-radius: 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #334155;
+  padding: 2px 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-auto-title:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+  border-color: #64748b;
+}
+
+@media print {
+  .btn-auto-title { display: none !important; }
+}
+
+</style>
 </head>
 <body>
   <div class="container">
@@ -1209,7 +1280,10 @@ tr.summary-row-grand td {
 
     <!-- ============ SYSTEM TITLE ============ -->
     <div class="system-title-container">
-      <h3 class="system-title" id="system-title">Solar System</h3>
+      <div class="system-title-wrapper">
+        <h3 class="system-title" id="system-title" contenteditable="true" title="Click to edit system title directly" oninput="docInfo.customTitle=this.textContent.trim()">Solar System</h3>
+        <button type="button" class="btn-auto-title" onclick="resetAutoSystemTitle()" title="Auto-generate title based on quotation items">&#9889; Auto Title</button>
+      </div>
     </div>
 
     <!-- ============ MAIN ITEMS TABLE ============ -->
@@ -1282,6 +1356,17 @@ tr.summary-row-grand td {
 
     <!-- ============ ACTION TOOLBAR ============ -->
                 <div class="toolbar">
+      <div class="template-picker-container">
+        <span class="template-label">&#9889; Quick Preset:</span>
+        <select id="system-preset-select" class="select-preset" onchange="applySystemPreset(this.value)">
+          <option value="" disabled selected>-- Select Product / System Solution --</option>
+          <option value="residential_solar">&#9728; Residential Hybrid Solar (7.38kWp / 8kW / 10.24kWh)</option>
+          <option value="ev_charger">&#128663; Smart EV Fast Charger (7kW / 22kW AC Wallbox)</option>
+          <option value="solar_pump">&#128167; Solar Deep Well Water Pump &amp; VFD System (5.5HP / 4kW)</option>
+          <option value="solar_vfd">&#9881; Solar Pump Inverter / VFD Controller (5.5kW MPPT)</option>
+          <option value="commercial_solar">&#127970; Commercial Hybrid Solar (18.4kWp / 15kW / 20.48kWh)</option>
+        </select>
+      </div>
       <button class="btn btn-add-section" onclick="addSection()">&#10133; Add New Section</button>
       <button class="btn btn-save" onclick="saveDraft()">Save Draft</button>
       <button class="btn btn-folder-save" onclick="saveToLocalFolder()" title="Save recursively to Microsoft OneDrive folder on this computer">
@@ -1369,51 +1454,102 @@ function updateDocIdLabel() {
 // Dynamically extract warranty years from Inverter, Solar Panel, and Battery Remarks in the table
 function getWarrantyYearsFromTable() {
   let solarWarranty = '10-12 Years';
-  let inverterWarranty = '2-5 Years';
+  let inverterWarranty = '3-5 Years';
   let batteryWarranty = '3-5 Years';
+  let evWarranty = '2-3 Years';
+  let pumpWarranty = '1-2 Years';
+  let vfdWarranty = '2-3 Years';
+  let hasEv = false;
+  let hasPump = false;
+  let hasVfd = false;
 
   if (Array.isArray(sections)) {
     sections.forEach(sec => {
       (sec.items || []).forEach(it => {
-        const name = (it.item || '').toLowerCase();
+        const name = (it.item || '').toLowerCase() + ' ' + (it.desc || '').toLowerCase();
         const rem = (it.remark || '').trim();
-        if (!rem) return;
 
-        if (name.includes('solar') && name.includes('panel')) {
+        if (name.includes('solar') && name.includes('panel') && rem) {
           const m = rem.match(/([\d\s\-toYrsYears]+(?:Years?|Yrs?))/i);
-          solarWarranty = m ? m[1].trim() : rem.replace(/warranty/i, '').trim() || rem;
+          solarWarranty = m ? m[1].trim() : rem;
         }
-        if (name.includes('inverter')) {
+        if (name.includes('inverter') && !name.includes('pump') && rem) {
           const m = rem.match(/([\d\s\-toYrsYears]+(?:Years?|Yrs?))/i);
-          inverterWarranty = m ? m[1].trim() : rem.replace(/warranty/i, '').trim() || rem;
+          inverterWarranty = m ? m[1].trim() : rem;
         }
-        if (name.includes('battery')) {
+        if (name.includes('battery') && rem) {
           const m = rem.match(/([\d\s\-toYrsYears]+(?:Years?|Yrs?))/i);
-          batteryWarranty = m ? m[1].trim() : rem.replace(/warranty/i, '').trim() || rem;
+          batteryWarranty = m ? m[1].trim() : rem;
+        }
+        if (name.includes('ev') || name.includes('charger') || name.includes('wallbox')) {
+          hasEv = true;
+          if (rem) {
+            const m = rem.match(/([\d\s\-toYrsYears]+(?:Years?|Yrs?))/i);
+            if (m) evWarranty = m[1].trim();
+          }
+        }
+        if (name.includes('pump') && (name.includes('submersible') || name.includes('water'))) {
+          hasPump = true;
+          if (rem) {
+            const m = rem.match(/([\d\s\-toYrsYears]+(?:Years?|Yrs?))/i);
+            if (m) pumpWarranty = m[1].trim();
+          }
+        }
+        if (name.includes('vfd') || name.includes('pump inverter')) {
+          hasVfd = true;
+          if (rem) {
+            const m = rem.match(/([\d\s\-toYrsYears]+(?:Years?|Yrs?))/i);
+            if (m) vfdWarranty = m[1].trim();
+          }
         }
       });
     });
   }
 
-  return { solarWarranty, inverterWarranty, batteryWarranty };
+  return { solarWarranty, inverterWarranty, batteryWarranty, evWarranty, pumpWarranty, vfdWarranty, hasEv, hasPump, hasVfd };
 }
 
 function generateQuotationTerms() {
-  const { solarWarranty, inverterWarranty, batteryWarranty } = getWarrantyYearsFromTable();
-  return `1. Solar Panels: ${solarWarranty} standard manufacturer product & performance warranty.\n` +
-         `2. Inverter: ${inverterWarranty} manufacturer warranty (Sandi / Deye / Solis Hybrid & On-grid).\n` +
-         `3. Battery Storage: ${batteryWarranty} manufacturer warranty for LiFePO4 Lithium Battery banks.\n` +
-         `4. Workmanship & Installation: 1-Year comprehensive installation & wiring warranty.\n` +
-         `5. All installations conducted by certified Aye Yeik Nyo engineering specialists.`;
+  const w = getWarrantyYearsFromTable();
+  const lines = [];
+  let idx = 1;
+
+  if (w.hasEv && !w.hasPump) {
+    lines.push((idx++) + '. EV Charger: ' + w.evWarranty + ' standard manufacturer product warranty.');
+    lines.push((idx++) + '. Protection & DB Unit: 1-Year warranty for breakers, RCD & surge arresters.');
+  } else if (w.hasPump || w.hasVfd) {
+    lines.push((idx++) + '. Solar Panels: ' + w.solarWarranty + ' standard manufacturer product & performance warranty.');
+    lines.push((idx++) + '. Solar Pump VFD Controller: ' + w.vfdWarranty + ' manufacturer warranty (MPPT & Protection).');
+    if (w.hasPump) {
+      lines.push((idx++) + '. Submersible Pump & Motor: ' + w.pumpWarranty + ' manufacturer warranty against factory defect.');
+    }
+  } else {
+    lines.push((idx++) + '. Solar Panels: ' + w.solarWarranty + ' standard manufacturer product & performance warranty.');
+    lines.push((idx++) + '. Inverter: ' + w.inverterWarranty + ' manufacturer warranty (Sandi / Deye / Luxpower / Solis).');
+    lines.push((idx++) + '. Battery Storage: ' + w.batteryWarranty + ' manufacturer warranty for LiFePO4 Lithium Battery banks.');
+  }
+
+  lines.push((idx++) + '. Workmanship & Installation: 1-Year comprehensive installation & wiring warranty.');
+  lines.push((idx++) + '. All installations conducted by certified Aye Yeik Nyo engineering specialists.');
+  return lines.join('\n');
 }
 
 function generateInvoiceTerms() {
-  const { solarWarranty, inverterWarranty, batteryWarranty } = getWarrantyYearsFromTable();
-  return `1. Official Warranty commences upon system commissioning & handover.\n` +
-         `2. Standard Warranty: Solar Panels (${solarWarranty}), Inverter (${inverterWarranty}), Battery (${batteryWarranty}).\n` +
-         `3. Includes 1-Year complimentary scheduled quarterly on-site preventive maintenance.\n` +
-         `4. 24/7 Technical Service & Emergency Response Hotline: 09752749102.\n` +
-         `5. Warranty excludes physical damage, unauthorized tampering, or natural disasters.`;
+  const w = getWarrantyYearsFromTable();
+  let equipmentStr = '';
+  if (w.hasEv && !w.hasPump) {
+    equipmentStr = 'EV Charger (' + w.evWarranty + '), Protection DB (1 Year)';
+  } else if (w.hasPump || w.hasVfd) {
+    equipmentStr = 'Solar Panels (' + w.solarWarranty + '), VFD Controller (' + w.vfdWarranty + ')' + (w.hasPump ? (', Pump Motor (' + w.pumpWarranty + ')') : '');
+  } else {
+    equipmentStr = 'Solar Panels (' + w.solarWarranty + '), Inverter (' + w.inverterWarranty + '), Battery (' + w.batteryWarranty + ')';
+  }
+
+  return '1. Official Warranty commences upon system commissioning & handover.\n' +
+         '2. Standard Warranty: ' + equipmentStr + '.\n' +
+         '3. Includes 1-Year complimentary scheduled quarterly on-site preventive maintenance.\n' +
+         '4. 24/7 Technical Service & Emergency Response Hotline: 09752749102.\n' +
+         '5. Warranty excludes physical damage, unauthorized tampering, or natural disasters.';
 }
 
 function isQuotationTerms(s) {
@@ -1512,6 +1648,179 @@ function updateFooterLabelsAndDefaults(forceReset = false) {
   }
 }
 
+
+// ============================================================================
+// Aye Yeik Nyo Co., Ltd. - Multi-Product Presets & Smart Table Generation
+// Products: Hybrid/On-Grid Solar, Smart EV Chargers, Solar Water Pumps, VFDs
+// ============================================================================
+
+const SYSTEM_PRESETS = {
+  residential_solar: {
+    name: 'Residential Hybrid Solar System (7.38kWp / 8kW / 10.24kWh)',
+    projectDesc: '7.38kWp / 8kW Hybrid Solar Energy Storage System Installation for Generic Residential Project',
+    sections: [
+      { name: 'Main Equipment & Inverter / Battery System', items: [
+        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:12, unit:'Pcs', price:420000, remark:'10-12 Years Warranty', highlight:false },
+        { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi Hybrid', spec:'8kW Single / Three Phase', qty:1, unit:'Unit', price:5800000, remark:'3-5 Years Warranty', highlight:false },
+        { item:'Lithium Battery Storage', desc:'LiFePO4 Solar Energy Storage (Smart BMS)', spec:'51.2V 200Ah (10.24kWh)', qty:1, unit:'Unit', price:7500000, remark:'3-5 Years Warranty', highlight:false },
+        { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:650000, remark:'IP65 Waterproof Enclosure', highlight:false },
+      ]},
+      { name: 'On-Site Usage Materials & BOS', items: [
+        { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:60, unit:'Meter', price:6500, remark:'Estimated On Site Usage', highlight:true },
+        { item:'MC4 Solar Connectors', desc:'IP68 Waterproof High Voltage Connectors', spec:'1500V DC / 30A', qty:6, unit:'Pairs', price:9500, remark:'Heavy Duty Weatherproof', highlight:false },
+        { item:'Solar Mounting Aluminum Rack', desc:'AL6005-T5 Aluminum Rails, Clamps & L-Feet', spec:'Roof Mount (7.38kWp Structure)', qty:1, unit:'Lot', price:680000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Earth Grounding System', desc:'Copper Rod (5/8 inch x 10ft) & Grounding Compound', spec:'16mm-sq Bare Earth Wire (< 5 Ohms)', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'uPVC Conduits & Accessories', desc:'Heavy Duty Conduits, Flexible Pipes & Trunking', spec:'Fire Retardant Class 8.5/13.5', qty:1, unit:'Lot', price:380000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'AC Distribution & Changeover ATS', desc:'Automatic / Manual ATS (63A) & AC Cabling', spec:'Main DB Interlocking & Load Distribution', qty:1, unit:'Lot', price:520000, remark:'Estimated On Site Usage', highlight:true },
+      ]},
+      { name: 'Installation & Engineering Labor', items: [
+        { item:'Installation & Mounting Labor', desc:'Mechanical Mounting, DC/AC Wiring & Dressing', spec:'7.38kWp Residential System', qty:1, unit:'Lot', price:950000, remark:'Certified Engineering Team', highlight:false },
+        { item:'System Testing & Commissioning', desc:'Inverter Setup, Battery Balancing & Handover', spec:'Full Configuration & User Training', qty:1, unit:'Set', price:350000, remark:'Testing Inspection & 1-Year Free Service', highlight:false },
+      ]},
+      { name: 'Logistics & Site Delivery', items: [
+        { item:'Transportation & Logistics', desc:'Site Logistics, Packaging & Equipment Handling', spec:'Mandalay & Surrounding Area', qty:1, unit:'Trip', price:250000, remark:'Depend On Site Location', highlight:false },
+      ]},
+    ]
+  },
+
+  ev_charger: {
+    name: 'Smart EV AC Fast Charger (7kW / 22kW Wallbox System)',
+    projectDesc: '7kW / 22kW Smart EV AC Fast Charger Installation with Protection DB for Residential / Commercial Property',
+    sections: [
+      { name: 'EV Charger & Main Equipment', items: [
+        { item:'Smart EV AC Wallbox Charger', desc:'Smart App / RFID / OCPP 1.6J Dynamic Load', spec:'7kW / 22kW (Type 2 Gun / 5m-7m Cable)', qty:1, unit:'Unit', price:1850000, remark:'2-3 Years Warranty', highlight:false },
+        { item:'EV Dedicated Protection DB', desc:'Aye Yeik Nyo EV Safety Protection Enclosure', spec:'Type A/B RCD (30mA/6mA DC), 40A/63A MCB & SPD', qty:1, unit:'Set', price:380000, remark:'IP65 Enclosure & Emergency Stop', highlight:false },
+        { item:'EV Charger Mounting Stand', desc:'Powder-Coated Aluminum / Stainless Steel Pedestal', spec:'Outdoor Floor Mount Pedestal', qty:1, unit:'Set', price:280000, remark:'Weatherproof Stand', highlight:false },
+      ]},
+      { name: 'On-Site Usage Cabling & Earthing', items: [
+        { item:'Heavy Duty AC Supply Cable', desc:'Pure Copper Cu/XLPE/PVC Multi-core Cable', spec:'3x6mm-sq / 5x10mm-sq', qty:30, unit:'Meter', price:18500, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Dedicated TT/TN Earthing System', desc:'Pure Copper Earth Rod (5/8 inch x 10ft) & Clamp', spec:'Earth Resistance < 4 Ohms (EV Standard)', qty:1, unit:'Lot', price:350000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'uPVC / Metal Conduits & Fittings', desc:'Heavy Duty Protection Conduits, Glands & Trunking', spec:'Fire Retardant Class Heavy Duty', qty:1, unit:'Lot', price:220000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Main DB AC Integration & Breakers', desc:'High Breaking Capacity 40A-63A Breaker & Sync', spec:'Industrial Grade Breakers', qty:1, unit:'Lot', price:250000, remark:'Estimated On Site Usage', highlight:true },
+      ]},
+      { name: 'Installation & Technical Commissioning', items: [
+        { item:'EV Charger Installation Labor', desc:'Mechanical Mounting, Cable Pulling & Termination', spec:'Certified Electrical Engineers', qty:1, unit:'Lot', price:450000, remark:'Aye Yeik Nyo Certified Team', highlight:false },
+        { item:'Smart App Setup & Safety Testing', desc:'WiFi/4G App Setup, RFID Programming & Earth Testing', spec:'Full Commissioning & Handover', qty:1, unit:'Set', price:180000, remark:'Testing Inspection & User Training', highlight:false },
+      ]},
+      { name: 'Logistics & Site Support', items: [
+        { item:'Transportation & Delivery', desc:'Site Logistics & Equipment Handling', spec:'Mandalay & Surrounding Area', qty:1, unit:'Trip', price:150000, remark:'Depend On Site Location', highlight:false },
+      ]},
+    ]
+  },
+
+  solar_pump: {
+    name: 'Solar Deep Well Water Pump & VFD System (5.5HP / 4kW)',
+    projectDesc: '5.5HP (4kW) Solar Deep Well Submersible Pumping & VFD Irrigation System Installation',
+    sections: [
+      { name: 'Solar Generator & Pumping Machinery', items: [
+        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:11, unit:'Pcs', price:420000, remark:'10-12 Years Warranty', highlight:false },
+        { item:'Solar Pump VFD Inverter', desc:'INVT / Veichi / Hicon Solar MPPT Pump Inverter', spec:'5.5kW (7.5HP) 3-Phase 380V Smart MPPT', qty:1, unit:'Unit', price:1650000, remark:'2-3 Years Warranty', highlight:false },
+        { item:'Submersible Deep Well Pump', desc:'Stainless Steel Multi-stage Borehole Pump & Motor', spec:'5.5HP (4kW) 380V / Head 120m-180m', qty:1, unit:'Set', price:2850000, remark:'1-2 Years Warranty', highlight:false },
+        { item:'Solar VFD Control & Protection DB', desc:'IP54 Weatherproof Outdoor Control Cabinet', spec:'1000V DC SPD, DC MCB, AC Breaker & Water Sensors', qty:1, unit:'Set', price:550000, remark:'Automatic Level Control', highlight:false },
+      ]},
+      { name: 'On-Site Usage Materials & Well BOS', items: [
+        { item:'Submersible Flat Waterproof Cable', desc:'Pure Copper Heavy Duty Submersible Cable', spec:'3x4mm-sq / 3x6mm-sq Waterproof', qty:120, unit:'Meter', price:9500, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Solar PV DC Cable', desc:'TUV Certified Solar Double Insulated Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:50, unit:'Meter', price:6500, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Ground Mounting Solar Structure', desc:'Hot-Dip Galvanized / Heavy AL Ground Mount Racks', spec:'Ground Structure (6.7kWp PV Array)', qty:1, unit:'Lot', price:750000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Stainless Steel Safety Suspension Wire', desc:'304 Stainless Steel Pump Safety Wire (5mm)', spec:'Heavy Duty 150m Wire & Clamps', qty:1, unit:'Lot', price:280000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Wellhead Flange & Pressure Pipe Fitting', desc:'Heavy Duty Wellhead Assembly & Non-Return Valve', spec:'2.5 inch / 3 inch High Pressure Set', qty:1, unit:'Set', price:350000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Deep Earth Grounding & Lightning Kit', desc:'Copper Earth Rod & Lightning Surge Protection', spec:'Earth Resistance < 5 Ohms', qty:1, unit:'Lot', price:380000, remark:'Estimated On Site Usage', highlight:true },
+      ]},
+      { name: 'Installation & Pumping Engineering', items: [
+        { item:'Solar Array & Pumping Installation', desc:'Mechanical Ground Mounting & Electrical Wiring', spec:'6.7kWp Solar Pumping System', qty:1, unit:'Lot', price:850000, remark:'Certified Engineering Team', highlight:false },
+        { item:'Pump Lowering & VFD Commissioning', desc:'Well Lowering, Water Level Sensor Calibration & Testing', spec:'Full Parameter Tuning & Handover', qty:1, unit:'Set', price:450000, remark:'Testing Inspection & User Training', highlight:false },
+      ]},
+      { name: 'Logistics & Site Logistics', items: [
+        { item:'Transportation & Site Logistics', desc:'Pump, Structure & Panel Delivery to Site', spec:'Mandalay / Regional Site Delivery', qty:1, unit:'Trip', price:350000, remark:'Depend On Site Location', highlight:false },
+      ]},
+    ]
+  },
+
+  solar_vfd: {
+    name: 'Solar Pump Inverter / VFD Controller (5.5kW MPPT Package)',
+    projectDesc: '5.5kW Solar Pump VFD Inverter Controller & IP54 Protection Panel Package',
+    sections: [
+      { name: 'VFD Inverter & Protection Equipment', items: [
+        { item:'Solar Pump VFD Inverter', desc:'INVT / Veichi / Hicon Variable Frequency Drive', spec:'5.5kW (7.5HP) 380V 3-Phase MPPT Controller', qty:1, unit:'Unit', price:1650000, remark:'2-3 Years Warranty', highlight:false },
+        { item:'Custom Solar VFD Control Panel', desc:'Aye Yeik Nyo Dual Door IP54 Weatherproof Enclosure', spec:'Built-in Cooling Fans, DC Isolator & AC Bypass', qty:1, unit:'Set', price:650000, remark:'Dust & Moisture Proof', highlight:false },
+        { item:'DC & AC Surge Protection Unit', desc:'High Surge Capacity SPD (1000V DC & 400V AC)', spec:'Class II Lightning Surge Protection', qty:1, unit:'Set', price:280000, remark:'Heavy Duty Protection', highlight:false },
+        { item:'Automatic Water Level Sensor Kit', desc:'Stainless Steel Well Water & Tank Level Probes', spec:'Dry-Run & Overflow Auto Sensing (50m wire)', qty:1, unit:'Set', price:180000, remark:'Intelligent Level Control', highlight:false },
+      ]},
+      { name: 'On-Site Accessories & Wiring', items: [
+        { item:'Control Wiring & Accessories Kit', desc:'Terminal Blocks, Copper Lugs & Flexible Conduits', spec:'Heavy Duty Industrial Wiring Set', qty:1, unit:'Lot', price:190000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Grounding & Earth Spike Kit', desc:'Pure Copper Earth Rod (5/8 inch x 6ft) & Bare Wire', spec:'Equipment Surge Grounding', qty:1, unit:'Lot', price:180000, remark:'Estimated On Site Usage', highlight:true },
+      ]},
+      { name: 'Engineering & Parameter Setup', items: [
+        { item:'VFD Programming & Parameter Setup', desc:'Motor V/F Curve Matching, MPPT Tracking & Tuning', spec:'Testing & Configuration', qty:1, unit:'Set', price:250000, remark:'Technical Support Included', highlight:false },
+      ]},
+      { name: 'Logistics & Delivery', items: [
+        { item:'Delivery & Courier Handling', desc:'Express Courier / Site Delivery', spec:'Myanmar Countrywide Delivery', qty:1, unit:'Set', price:80000, remark:'Depend On Site Location', highlight:false },
+      ]},
+    ]
+  },
+
+  commercial_solar: {
+    name: 'Commercial Hybrid Solar System (18.4kWp / 15kW / 20.48kWh)',
+    projectDesc: '18.4kWp / 15kW 3-Phase Hybrid Solar Energy Storage System Installation for Commercial Facility',
+    sections: [
+      { name: 'Commercial Equipment & Power Storage', items: [
+        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:30, unit:'Pcs', price:420000, remark:'10-12 Years Warranty', highlight:false },
+        { item:'Hybrid Inverter', desc:'Deye / Sandi / Luxpower 3-Phase Hybrid', spec:'15kW / 20kW 3-Phase 380V', qty:1, unit:'Unit', price:9800000, remark:'3-5 Years Warranty', highlight:false },
+        { item:'Lithium Battery Storage', desc:'LiFePO4 Commercial Energy Storage Bank', spec:'51.2V 200Ah x 2 Units (20.48kWh)', qty:2, unit:'Unit', price:7500000, remark:'3-5 Years Warranty', highlight:false },
+        { item:'Commercial Solar Combiner & DB', desc:'Heavy Duty 3-Phase Solar Protection DB', spec:'1000V DC SPD, 3P DC MCB, 63A AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'IP65 Industrial Enclosure', highlight:false },
+      ]},
+      { name: 'On-Site Usage Materials & Commercial BOS', items: [
+        { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Cable', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:150, unit:'Meter', price:6500, remark:'Estimated On Site Usage', highlight:true },
+        { item:'MC4 Solar Connectors', desc:'IP68 Waterproof High Voltage Connectors', spec:'1500V DC / 30A', qty:12, unit:'Pairs', price:9500, remark:'Heavy Duty', highlight:false },
+        { item:'Commercial Aluminum Racking System', desc:'AL6005-T5 Aluminum Rail, Clamps & Hardware', spec:'Roof / Metal Shed Mounting (18.4kWp)', qty:1, unit:'Lot', price:1650000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Heavy Duty Earth Grounding System', desc:'Multiple Copper Rods & Grounding Enhancement', spec:'Earth Resistance < 3 Ohms Standard', qty:1, unit:'Lot', price:750000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'uPVC / Metal Conduits & Cable Trays', desc:'Heavy Duty Conduits, Trays & Cable Ladder', spec:'Industrial Standard', qty:1, unit:'Lot', price:680000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'3-Phase AC Distribution & ATS Panel', desc:'3-Phase 100A Automatic Transfer Switch & Cabling', spec:'Main Switchboard Integration', qty:1, unit:'Lot', price:950000, remark:'Estimated On Site Usage', highlight:true },
+      ]},
+      { name: 'Engineering, Installation & Commissioning', items: [
+        { item:'Commercial Installation & Cabling Labor', desc:'Mechanical Mounting, DC/AC Wiring & Cable Tray Dressing', spec:'18.4kWp Commercial System', qty:1, unit:'Lot', price:1950000, remark:'Senior Engineering Team', highlight:false },
+        { item:'System Configuration, Testing & Commissioning', desc:'3-Phase Inverter Setup, Grid Sync, Battery Balancing', spec:'Full Testing & Handover', qty:1, unit:'Set', price:650000, remark:'Certificate & 1-Year Free Inspection', highlight:false },
+      ]},
+      { name: 'Logistics & Transportation', items: [
+        { item:'Transportation & Material Handling', desc:'Direct Site Delivery & Unloading', spec:'Mandalay & Regional Facility', qty:1, unit:'Trip', price:450000, remark:'Depend On Site Location', highlight:false },
+      ]},
+    ]
+  }
+};
+
+function applySystemPreset(presetKey) {
+  const preset = SYSTEM_PRESETS[presetKey];
+  if (!preset) return;
+
+  if (confirm("Load \"" + preset.name + "\" preset?\n\nThis will populate standard Myanmar market items, on-site usage estimates, and warranty terms for this system.")) {
+    sections = JSON.parse(JSON.stringify(preset.sections));
+    docInfo.projectDesc = preset.projectDesc;
+    docInfo.customTitle = '';
+    
+    const descEl = document.getElementById('project-desc');
+    if (descEl) descEl.value = preset.projectDesc;
+
+    updateFooterLabelsAndDefaults(true);
+    updateSystemTitle();
+    render();
+    
+    // Reset dropdown back to default placeholder
+    const selectEl = document.getElementById('system-preset-select');
+    if (selectEl) selectEl.value = '';
+    
+    if (typeof showToast === 'function') {
+      showToast("Loaded \"" + preset.name + "\" successfully!");
+    } else {
+      alert("Loaded \"" + preset.name + "\" successfully!");
+    }
+  }
+}
+
+function resetAutoSystemTitle() {
+  docInfo.customTitle = '';
+  updateSystemTitle();
+}
+
 function defaultData() {
   return [
     { name: 'Main Equipment & Inverter / Battery System', items: [
@@ -1594,38 +1903,86 @@ function onDocTypeChange() {
 
 // =====================  SYSTEM TITLE & CAPACITY PARSING  =====================
 function getSystemTitle() {
+  if (docInfo && docInfo.customTitle && docInfo.customTitle.trim()) {
+    return docInfo.customTitle.trim();
+  }
+
   let solarWp = 0;
   let inverterKw = 0;
   let batteryKwh = 0;
-  sections.forEach(sec => {
-    sec.items.forEach(it => {
-      const name = (it.item || '').toLowerCase();
-      if (name.includes('solar') && name.includes('panel')) {
-        const m = (it.spec || '').match(/([\d.]+)\s*w/i);
-        if (m) solarWp += parseFloat(m[1]) * (it.qty || 0);
-      }
-      if (name.includes('inverter')) {
-        const m = (it.spec || '').match(/([\d.]+)\s*kw/i);
-        if (m) inverterKw += parseFloat(m[1]) * (it.qty || 0);
-      }
-      if (name.includes('battery')) {
-        const mv = (it.spec || '').match(/([\d.]+)\s*v/i);
-        const ma = (it.spec || '').match(/([\d.]+)\s*ah/i);
-        if (mv && ma) {
-          batteryKwh += (parseFloat(mv[1]) * parseFloat(ma[1]) / 1000) * (it.qty || 0);
+  let evChargerKw = 0;
+  let pumpHp = 0;
+  let pumpKw = 0;
+  let vfdKw = 0;
+  let hasEv = false;
+  let hasPump = false;
+  let hasVfd = false;
+  let hasSolar = false;
+
+  if (Array.isArray(sections)) {
+    sections.forEach(sec => {
+      (sec.items || []).forEach(it => {
+        const name = (it.item || '').toLowerCase() + ' ' + (it.desc || '').toLowerCase();
+        const spec = (it.spec || '').toLowerCase();
+        const qty = it.qty || 0;
+
+        if (name.includes('solar') && name.includes('panel')) {
+          hasSolar = true;
+          const m = spec.match(/([\d.]+)\s*w/i);
+          if (m) solarWp += parseFloat(m[1]) * qty;
+        } else if (name.includes('ev') || name.includes('charger') || name.includes('wallbox')) {
+          hasEv = true;
+          const m = spec.match(/([\d.]+)\s*kw/i);
+          if (m) evChargerKw = Math.max(evChargerKw, parseFloat(m[1]));
+        } else if (name.includes('pump') && (name.includes('submersible') || name.includes('borehole') || name.includes('water'))) {
+          hasPump = true;
+          const mh = spec.match(/([\d.]+)\s*hp/i);
+          const mk = spec.match(/([\d.]+)\s*kw/i);
+          if (mh) pumpHp = Math.max(pumpHp, parseFloat(mh[1]));
+          if (mk) pumpKw = Math.max(pumpKw, parseFloat(mk[1]));
+        } else if (name.includes('vfd') || name.includes('pump inverter') || name.includes('frequency drive')) {
+          hasVfd = true;
+          const mk = spec.match(/([\d.]+)\s*kw/i);
+          if (mk) vfdKw = Math.max(vfdKw, parseFloat(mk[1]));
+        } else if (name.includes('inverter')) {
+          const m = spec.match(/([\d.]+)\s*kw/i);
+          if (m) inverterKw += parseFloat(m[1]) * qty;
+        } else if (name.includes('battery')) {
+          const mv = spec.match(/([\d.]+)\s*v/i);
+          const ma = spec.match(/([\d.]+)\s*ah/i);
+          if (mv && ma) {
+            batteryKwh += (parseFloat(mv[1]) * parseFloat(ma[1]) / 1000) * qty;
+          }
         }
-      }
+      });
     });
-  });
+  }
 
   const solarStr = solarWp >= 1000 ? (solarWp / 1000).toFixed(1).replace(/\.0$/, '') + 'kWp' : solarWp + 'Wp';
   const inverterStr = (inverterKw % 1 === 0) ? inverterKw.toString() : inverterKw.toFixed(1);
   const batteryStr = (batteryKwh % 1 === 0) ? batteryKwh.toString() : (Math.round(batteryKwh * 10) / 10).toString();
 
+  // Smart Product Detection
+  if (hasEv && !hasSolar && !hasPump) {
+    return evChargerKw > 0 ? (evChargerKw + 'kW Smart EV Fast Charger System') : 'Smart EV Fast Charger System';
+  }
+
+  if (hasPump && hasVfd) {
+    const pumpStr = pumpHp > 0 ? (pumpHp + 'HP (' + (pumpKw || (pumpHp * 0.75).toFixed(1)) + 'kW)') : (pumpKw > 0 ? pumpKw + 'kW' : '');
+    const solStr = solarWp > 0 ? (' with ' + solarStr + ' Solar Array') : '';
+    return (pumpStr + ' Solar Deep Well Pumping & VFD System' + solStr).trim();
+  }
+
+  if (hasVfd && !hasSolar && !hasPump) {
+    return vfdKw > 0 ? (vfdKw + 'kW Solar Pump VFD Controller System') : 'Solar Pump VFD Controller System';
+  }
+
+  // Hybrid Solar or Multi-product Combination
   const parts = [];
   if (inverterKw > 0) parts.push(inverterStr + 'kW Inverter');
   if (batteryKwh > 0) parts.push(batteryStr + 'kWh Battery');
   if (solarWp > 0) parts.push(solarStr + ' Solar System');
+  if (hasEv) parts.push((evChargerKw > 0 ? evChargerKw + 'kW ' : '') + 'EV Charger');
 
   return parts.join(' and ') || 'Solar System';
 }
