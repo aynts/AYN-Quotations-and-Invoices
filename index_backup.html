@@ -1661,9 +1661,9 @@ const SYSTEM_PRESETS = {
     sections: [
       { name: 'Main Equipment & Inverter / Battery System', items: [
         { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:12, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
-        { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi (IP65 Outdoor)', spec:'8kW Single / Three Phase (IP65)', qty:1, unit:'Unit', price:4600000, remark:'3-5 Years Warranty (IP20: 2.0M / IP65: 4.6M)', highlight:false },
+        { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi Hybrid Inverter', spec:'8kW Single / Three Phase', qty:1, unit:'Unit', price:4600000, remark:'3-5 Years Manufacturer Warranty', highlight:false },
         { item:'Lithium Battery Storage', desc:'LiFePO4 Solar Energy Storage (Smart BMS)', spec:'51.2V 200Ah (10.24kWh)', qty:1, unit:'Unit', price:8800000, remark:'3-5 Years Warranty', highlight:false },
-        { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'IP65 Waterproof Enclosure', highlight:false },
+        { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'Dual Layer Protection Enclosure', highlight:false },
       ]},
       { name: 'On-Site Usage Materials & BOS', items: [
         { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:60, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
@@ -1691,7 +1691,7 @@ const SYSTEM_PRESETS = {
     sections: [
       { name: 'EV Charger & Main Equipment', items: [
         { item:'Smart EV AC Wallbox Charger', desc:'Smart App / RFID / OCPP 1.6J Dynamic Load', spec:'7kW / 22kW (Type 2 Gun / 5m-7m Cable)', qty:1, unit:'Unit', price:2850000, remark:'2-3 Years Warranty', highlight:false },
-        { item:'EV Dedicated Protection DB', desc:'Aye Yeik Nyo EV Safety Protection Enclosure', spec:'Type A/B RCD (30mA/6mA DC), 40A/63A MCB & SPD', qty:1, unit:'Set', price:650000, remark:'IP65 Enclosure & Emergency Stop', highlight:false },
+        { item:'EV Dedicated Protection DB', desc:'Aye Yeik Nyo EV Safety Protection Enclosure', spec:'Type A/B RCD (30mA/6mA DC), 40A/63A MCB & SPD', qty:1, unit:'Set', price:650000, remark:'Outdoor Enclosure & Emergency Stop', highlight:false },
         { item:'EV Charger Mounting Stand', desc:'Powder-Coated Aluminum / Stainless Steel Pedestal', spec:'Outdoor Floor Mount Pedestal', qty:1, unit:'Set', price:450000, remark:'Weatherproof Stand', highlight:false },
       ]},
       { name: 'On-Site Usage Cabling & Earthing', items: [
@@ -1719,7 +1719,7 @@ const SYSTEM_PRESETS = {
         { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:11, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
         { item:'Solar Pump VFD Inverter', desc:'INVT / Veichi / Hicon Solar MPPT Pump Inverter', spec:'5.5kW (7.5HP) 3-Phase 380V Smart MPPT', qty:1, unit:'Unit', price:2350000, remark:'2-3 Years Warranty', highlight:false },
         { item:'Submersible Deep Well Pump', desc:'Stainless Steel Multi-stage Borehole Pump & Motor', spec:'5.5HP (4kW) 380V / Head 120m-180m', qty:1, unit:'Set', price:3850000, remark:'1-2 Years Warranty', highlight:false },
-        { item:'Solar VFD Control & Protection DB', desc:'IP54 Weatherproof Outdoor Control Cabinet', spec:'1000V DC SPD, DC MCB, AC Breaker & Water Sensors', qty:1, unit:'Set', price:950000, remark:'Automatic Level Control', highlight:false },
+        { item:'Solar VFD Control & Protection DB', desc:'Outdoor Weatherproof Control Cabinet', spec:'1000V DC SPD, DC MCB, AC Breaker & Water Sensors', qty:1, unit:'Set', price:950000, remark:'Automatic Level Control', highlight:false },
       ]},
       { name: 'On-Site Usage Materials & Well BOS', items: [
         { item:'Submersible Flat Waterproof Cable', desc:'Pure Copper Heavy Duty Submersible Cable', spec:'3x4mm-sq / 3x6mm-sq Waterproof', qty:120, unit:'Meter', price:23750, remark:'Estimated On Site Usage', highlight:true },
@@ -1743,11 +1743,11 @@ const SYSTEM_PRESETS = {
 
   solar_vfd: {
     name: 'Solar Pump Inverter / VFD Controller (5.5kW MPPT Package)',
-    projectDesc: '5.5kW Solar Pump VFD Inverter Controller & IP54 Protection Panel Package',
+    projectDesc: '5.5kW Solar Pump VFD Inverter Controller & Protection Panel Package',
     sections: [
       { name: 'VFD Inverter & Protection Equipment', items: [
         { item:'Solar Pump VFD Inverter', desc:'INVT / Veichi / Hicon Variable Frequency Drive', spec:'5.5kW (7.5HP) 380V 3-Phase MPPT Controller', qty:1, unit:'Unit', price:2350000, remark:'2-3 Years Warranty', highlight:false },
-        { item:'Custom Solar VFD Control Panel', desc:'Aye Yeik Nyo Dual Door IP54 Weatherproof Enclosure', spec:'Built-in Cooling Fans, DC Isolator & AC Bypass', qty:1, unit:'Set', price:1150000, remark:'Dust & Moisture Proof', highlight:false },
+        { item:'Custom Solar VFD Control Panel', desc:'Aye Yeik Nyo Dual Door Weatherproof Enclosure', spec:'Built-in Cooling Fans, DC Isolator & AC Bypass', qty:1, unit:'Set', price:1150000, remark:'Dust & Moisture Proof', highlight:false },
         { item:'DC & AC Surge Protection Unit', desc:'High Surge Capacity SPD (1000V DC & 400V AC)', spec:'Class II Lightning Surge Protection', qty:1, unit:'Set', price:550000, remark:'Heavy Duty Protection', highlight:false },
         { item:'Automatic Water Level Sensor Kit', desc:'Stainless Steel Well Water & Tank Level Probes', spec:'Dry-Run & Overflow Auto Sensing (50m wire)', qty:1, unit:'Set', price:350000, remark:'Intelligent Level Control', highlight:false },
       ]},
@@ -1770,9 +1770,9 @@ const SYSTEM_PRESETS = {
     sections: [
       { name: 'Commercial Equipment & Power Storage', items: [
         { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:30, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
-        { item:'Hybrid Inverter', desc:'Deye / Sandi / Luxpower 3-Phase (IP65 Outdoor)', spec:'15kW / 20kW 3-Phase 380V (IP65)', qty:1, unit:'Unit', price:9200000, remark:'3-5 Years Warranty (IP65 Premium)', highlight:false },
+        { item:'Hybrid Inverter', desc:'Deye / Sandi / Luxpower 3-Phase Hybrid Inverter', spec:'15kW / 20kW 3-Phase 380V', qty:1, unit:'Unit', price:9200000, remark:'3-5 Years Manufacturer Warranty', highlight:false },
         { item:'Lithium Battery Storage', desc:'LiFePO4 Commercial Energy Storage Bank', spec:'51.2V 200Ah x 2 Units (20.48kWh)', qty:2, unit:'Unit', price:8800000, remark:'3-5 Years Warranty', highlight:false },
-        { item:'Commercial Solar Combiner & DB', desc:'Heavy Duty 3-Phase Solar Protection DB', spec:'1000V DC SPD, 3P DC MCB, 63A AC SPD & Breakers', qty:1, unit:'Set', price:2500000, remark:'IP65 Industrial Enclosure', highlight:false },
+        { item:'Commercial Solar Combiner & DB', desc:'Heavy Duty 3-Phase Solar Protection DB', spec:'1000V DC SPD, 3P DC MCB, 63A AC SPD & Breakers', qty:1, unit:'Set', price:2500000, remark:'Industrial Protection Enclosure', highlight:false },
       ]},
       { name: 'On-Site Usage Materials & Commercial BOS', items: [
         { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Cable', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:150, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
@@ -1832,9 +1832,9 @@ function defaultData() {
   return [
     { name: 'Main Equipment & Inverter / Battery System', items: [
       { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:12, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
-      { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi (IP65 Outdoor)', spec:'8kW Single / Three Phase (IP65)', qty:1, unit:'Unit', price:4600000, remark:'3-5 Years Warranty (IP20: 2.0M / IP65: 4.6M)', highlight:false },
+      { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi Hybrid Inverter', spec:'8kW Single / Three Phase', qty:1, unit:'Unit', price:4600000, remark:'3-5 Years Manufacturer Warranty', highlight:false },
       { item:'Lithium Battery Storage', desc:'LiFePO4 Solar Energy Storage (Smart BMS)', spec:'51.2V 200Ah (10.24kWh)', qty:1, unit:'Unit', price:8800000, remark:'3-5 Years Warranty', highlight:false },
-      { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'IP65 Waterproof Enclosure', highlight:false },
+      { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'Dual Layer Protection Enclosure', highlight:false },
     ]},
     { name: 'On-Site Usage Materials & BOS', items: [
       { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:60, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
@@ -1927,32 +1927,51 @@ function calcSystemMetrics() {
   if (Array.isArray(sections)) {
     sections.forEach(sec => {
       (sec.items || []).forEach(it => {
-        const name = (it.item || '').toLowerCase() + ' ' + (it.desc || '').toLowerCase();
+        const item_name = (it.item || '').toLowerCase();
+        const desc = (it.desc || '').toLowerCase();
+        const name = item_name + ' ' + desc;
         const spec = (it.spec || '').toLowerCase();
+        const unit = (it.unit || '').toLowerCase().trim();
         const qty = it.qty || 0;
 
-        if (name.includes('solar') && name.includes('panel')) {
+        // Skip labor/wiring/mounting rows when calculating core equipment capacities
+        const isLabor = name.includes('labor') || name.includes('installation') || name.includes('mounting') ||
+                        name.includes('wiring') || name.includes('assembly') || name.includes('commissioning') ||
+                        name.includes('interconnection') || name.includes('setup') || name.includes('lowering') || name.includes('testing');
+
+        // 1. Solar Panels
+        if (name.includes('solar') && name.includes('panel') && !isLabor) {
           hasSolar = true;
           const m = spec.match(/([\d.]+)\s*w(?:p)?\b/i) || spec.match(/([\d.]+)\s*w/i);
           if (m) solarWp += parseFloat(m[1]) * qty;
-        } else if (name.includes('ev') || name.includes('charger') || name.includes('wallbox')) {
+        }
+        // 2. EV Fast Charger
+        else if ((name.includes('ev') || name.includes('charger') || name.includes('wallbox')) && !isLabor && unit !== 'kw') {
           hasEv = true;
           const m = spec.match(/([\d.]+)\s*kw\b/i) || spec.match(/([\d.]+)\s*kw/i);
           if (m) evKw = Math.max(evKw, parseFloat(m[1]) * qty);
-        } else if (name.includes('pump') && (name.includes('submersible') || name.includes('borehole') || name.includes('water'))) {
+        }
+        // 3. Solar Pump
+        else if (name.includes('pump') && (name.includes('submersible') || name.includes('borehole') || name.includes('water')) && !isLabor && unit !== 'hp' && unit !== 'kw') {
           hasPump = true;
           const mh = spec.match(/([\d.]+)\s*hp\b/i);
           const mk = spec.match(/([\d.]+)\s*kw\b/i);
           if (mh) pumpHp = Math.max(pumpHp, parseFloat(mh[1]));
           if (mk) pumpKw = Math.max(pumpKw, parseFloat(mk[1]));
-        } else if (name.includes('vfd') || name.includes('pump inverter') || name.includes('frequency drive')) {
+        }
+        // 4. Solar VFD Controller / Inverter
+        else if ((name.includes('vfd') || name.includes('pump inverter') || name.includes('frequency drive')) && !isLabor && unit !== 'kw') {
           hasVfd = true;
           const mk = spec.match(/([\d.]+)\s*kw\b/i) || spec.match(/([\d.]+)\s*kw/i);
           if (mk) vfdKw = Math.max(vfdKw, parseFloat(mk[1]) * qty);
-        } else if (name.includes('inverter')) {
+        }
+        // 5. Hybrid / Solar Inverter (Pure Equipment only)
+        else if (name.includes('inverter') && !isLabor && unit !== 'kw') {
           const m = spec.match(/([\d.]+)\s*kw\b/i) || spec.match(/([\d.]+)\s*kw/i);
           if (m) inverterKw += parseFloat(m[1]) * qty;
-        } else if (name.includes('battery')) {
+        }
+        // 6. Battery Storage (Pure Equipment only)
+        else if (name.includes('battery') && !isLabor && unit !== 'kwh') {
           const mv = spec.match(/([\d.]+)\s*v\b/i);
           const ma = spec.match(/([\d.]+)\s*ah\b/i);
           if (mv && ma) {
@@ -1997,7 +2016,7 @@ function getSystemTitle() {
     return m.vfdKw > 0 ? (m.vfdKw + 'kW Solar Pump VFD Controller System') : 'Solar Pump VFD Controller System';
   }
 
-  // 4. Hybrid / On-Grid Solar System (Standard Professional Format)
+  // 4. Hybrid / On-Grid Solar System
   if (m.solarWp > 0 && m.inverterKw > 0) {
     let base = solarStr + ' / ' + inverterStr + 'kW Hybrid Solar System';
     if (m.batteryKwh > 0) {
