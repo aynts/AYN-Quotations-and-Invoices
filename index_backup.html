@@ -1139,16 +1139,26 @@ tr.summary-row-grand td {
 }
 
 @media print {
+  @page {
+    size: A4 portrait;
+    margin: 5mm 7mm;
+  }
+
+  *, *:before, *:after {
+    box-sizing: border-box !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   html, body {
-    width: 210mm !important;
+    width: 196mm !important;
     height: auto !important;
-    max-height: 297mm !important;
+    max-height: 287mm !important;
     margin: 0 !important;
     padding: 0 !important;
     background: #ffffff !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
-    font-size: 11px !important;
+    font-size: 9.5px !important;
+    overflow: hidden !important;
   }
 
   .container {
@@ -1173,126 +1183,164 @@ tr.summary-row-grand td {
   .btn-del,
   .btn-del-section,
   .btn-move,
-  .hl-cb {
+  .hl-cb,
+  #system-preset-bar {
     display: none !important;
   }
 
   .doc-header-top {
-    padding: 6px 10px !important;
-    margin-bottom: 6px !important;
+    padding: 5px 8px !important;
+    margin-bottom: 4px !important;
+    border-radius: 4px !important;
   }
 
   .doc-left h2 {
-    font-size: 16px !important;
-    margin-bottom: 3px !important;
+    font-size: 14.5px !important;
+    margin-bottom: 2px !important;
   }
 
   .doc-left p, .company-info-row {
-    margin-bottom: 2px !important;
-    font-size: 10.5px !important;
-  }
-
-  .doc-center img {
-    width: 68px !important;
-    height: 68px !important;
-  }
-
-  .doc-right h3 {
-    font-size: 17px !important;
-    margin-bottom: 3px !important;
-  }
-
-  .doc-header-bottom {
-    margin: 6px 0 !important;
-    padding-top: 4px !important;
-  }
-
-  .system-title-container {
-    margin: 6px 0 8px !important;
-  }
-
-  .system-title {
-    font-size: 13.5px !important;
-    padding: 1px 6px !important;
-  }
-
-  .table-responsive {
-    margin-bottom: 8px !important;
-  }
-
-  table.main-table {
-    font-size: 10.5px !important;
-  }
-
-  table.main-table th, 
-  table.main-table td {
-    padding: 2.5px 4px !important;
+    margin-bottom: 1.5px !important;
+    font-size: 9px !important;
     line-height: 1.2 !important;
   }
 
-  table.main-table input[type="text"],
-  table.main-table input[type="number"] {
-    font-size: 10.5px !important;
+  .doc-center img {
+    width: 52px !important;
+    height: 52px !important;
   }
 
-  tr.section-header td {
+  .doc-right h3 {
+    font-size: 15px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .doc-right p, .doc-info-row {
+    margin-bottom: 1.5px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+  }
+
+  .doc-header-bottom {
+    margin: 4px 0 !important;
+    padding-top: 3px !important;
+    gap: 10px !important;
+  }
+
+  .client-info-group label, .project-info-group label {
+    font-size: 9.5px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .client-info-group input, .project-info-group textarea {
+    font-size: 9px !important;
+    padding: 2px 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  .system-title-container {
+    margin: 4px 0 6px !important;
+  }
+
+  .system-title {
+    font-size: 11.5px !important;
     padding: 3px 6px !important;
-    font-size: 11px !important;
+  }
+
+  table.main-table {
+    margin: 4px 0 !important;
+    font-size: 8.5px !important;
+    border-collapse: collapse !important;
+    page-break-inside: avoid !important;
+  }
+
+  table.main-table th {
+    padding: 3px 4px !important;
+    font-size: 8.5px !important;
+  }
+
+  table.main-table td {
+    padding: 2px 3.5px !important;
+    font-size: 8.5px !important;
+    line-height: 1.15 !important;
+  }
+
+  table.main-table input, table.main-table textarea {
+    font-size: 8.5px !important;
+    padding: 1px 2px !important;
+    line-height: 1.15 !important;
+    height: auto !important;
+    border: none !important;
+    background: transparent !important;
+  }
+
+  .section-header-row td {
+    padding: 3px 6px !important;
+    font-size: 9px !important;
+  }
+
+  tr.summary-row td {
+    padding: 3px 6px !important;
+    font-size: 9px !important;
+  }
+
+  tr.summary-row-grand td {
+    font-size: 10px !important;
+    padding: 4px 6px !important;
   }
 
   .doc-footer {
+    margin-top: 5px !important;
+    page-break-inside: avoid !important;
+  }
+
+  .footer-validity-box {
+    margin-bottom: 4px !important;
+    font-size: 8.5px !important;
+  }
+
+  .footer-meta-grid {
+    gap: 8px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .meta-card {
+    padding: 4px 6px !important;
+  }
+
+  .meta-card h4 {
+    font-size: 9px !important;
+    margin-bottom: 2px !important;
+  }
+
+  .meta-card textarea {
+    font-size: 8px !important;
+    line-height: 1.2 !important;
+    height: 38px !important;
+  }
+
+  .signatures-container {
     margin-top: 6px !important;
-    padding-top: 6px !important;
-  }
-
-  .validity-tag {
-    margin-bottom: 5px !important;
-    padding: 3px 6px !important;
-    font-size: 10.5px !important;
-  }
-
-  .terms-box {
-    gap: 10px !important;
-    margin-bottom: 8px !important;
-  }
-
-  .terms-col h4 {
-    font-size: 11px !important;
-    margin-bottom: 3px !important;
-  }
-
-  .terms-box textarea {
-    font-size: 9.5px !important;
-    line-height: 1.25 !important;
-    height: auto !important;
-  }
-
-  .signature-grid {
-    margin-top: 8px !important;
-    gap: 20px !important;
-  }
-
-  .sig-block {
     padding-top: 4px !important;
+    page-break-inside: avoid !important;
   }
 
   .sig-line {
+    width: 140px !important;
     margin-bottom: 3px !important;
   }
 
   .sig-title {
-    font-size: 11px !important;
+    font-size: 9px !important;
   }
 
   .sig-sub {
-    font-size: 9.5px !important;
+    font-size: 8px !important;
   }
 
-  .sig-seal {
-    width: 62px !important;
-    height: 62px !important;
-    font-size: 9px !important;
-    top: -16px !important;
+  .company-seal {
+    width: 42px !important;
+    height: 42px !important;
   }
 }
   
@@ -1983,15 +2031,15 @@ const SYSTEM_PRESETS = {
         { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:60, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
         { item:'MC4 Solar Connectors', desc:'IP68 Waterproof High Voltage Connectors', spec:'1500V DC / 30A', qty:6, unit:'Pairs', price:23750, remark:'Heavy Duty Weatherproof', highlight:false },
         { item:'Solar Mounting Aluminum Rack', desc:'AL6005-T5 Aluminum Rails, Mid/End Clamps & L-Feet', spec:'Roof Mount Racking Spec', qty:7380, unit:'Wp', price:230, remark:'Estimated On Site Usage', highlight:true },
-        { item:'Earth Grounding System', desc:'Copper Rod (5/8 inch x 10ft) & Grounding Compound', spec:'16mm-sq Bare Earth Wire (< 5 Ohms)', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Earth Grounding System', desc:'Copper-Bonded Earth Rod (5/8 inch x 10ft) & Compound', spec:'16mm-sq Earth Wire (< 5 Ohms)', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
         { item:'uPVC Conduits & Accessories', desc:'Heavy Duty Conduits, Flexible Pipes & Trunking', spec:'Fire Retardant Class 8.5/13.5', qty:1, unit:'Lot', price:950000, remark:'Estimated On Site Usage', highlight:true },
         { item:'AC Distribution & Changeover ATS', desc:'Automatic / Manual ATS (63A) & AC Cabling', spec:'Main DB Interlocking & Load Distribution', qty:1, unit:'Lot', price:1300000, remark:'Estimated On Site Usage', highlight:true },
       ]},
       { name: 'Installation & Engineering', items: [
-        { item:'Solar Array Installation & Mounting', desc:'Mechanical Rail Assembly & DC String Wiring', spec:'Rooftop PV Mounting Spec', qty:7380, unit:'Wp', price:300, remark:'Certified Solar Technicians', highlight:false },
-        { item:'Inverter & AC DB Interconnection', desc:'Inverter Mounting, AC DB Wiring & Grid Sync', spec:'8kW Hybrid Inverter Spec', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
-        { item:'Battery Storage Bank Assembly & BMS Setup', desc:'LiFePO4 Rack Assembly, High-Current DC & BMS Link', spec:'10.24kWh Storage Spec', qty:10.2, unit:'kWh', price:40000, remark:'Battery Specialists', highlight:false },
-        { item:'System Testing, Commissioning & Handover', desc:'Inverter Tuning, Cloud WiFi Setup & Safety Inspection', spec:'Full Testing & Handover', qty:1, unit:'Set', price:650000, remark:'Testing Inspection & 1-Year Free Service', highlight:false },
+        { item:'Solar Array Installation & Mounting', desc:'Roof Rail Assembly & DC Cabling', spec:'PV Array Setup', qty:7380, unit:'Wp', price:300, remark:'Certified Technicians', highlight:false },
+        { item:'Inverter & AC DB Interconnection', desc:'Inverter Mounting & AC DB Wiring', spec:'AC/DC Interconnection', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
+        { item:'Battery Bank Assembly & BMS Setup', desc:'Battery Rack & Smart BMS Link', spec:'DC Storage Wiring', qty:10.2, unit:'kWh', price:40000, remark:'Battery Specialists', highlight:false },
+        { item:'System Testing & Commissioning', desc:'Commissioning, App Setup & Testing', spec:'Full System Testing', qty:1, unit:'Set', price:650000, remark:'1-Year Free Service', highlight:false },
       ]},
       { name: 'Logistics & Site Delivery', items: [
         { item:'Transportation & Logistics', desc:'Site Logistics, Packaging & Equipment Handling', spec:'Mandalay & Surrounding Area', qty:1, unit:'Trip', price:450000, remark:'Depend On Site Location', highlight:false },
@@ -2009,15 +2057,15 @@ const SYSTEM_PRESETS = {
         { item:'EV Charger Mounting Stand', desc:'Powder-Coated Aluminum / Stainless Steel Pedestal', spec:'Outdoor Floor Mount Pedestal', qty:1, unit:'Set', price:450000, remark:'Weatherproof Stand', highlight:false },
       ]},
       { name: 'On-Site Usage Cabling & Earthing', items: [
-        { item:'Heavy Duty AC Supply Cable', desc:'Pure Copper Cu/XLPE/PVC Multi-core Cable', spec:'3x6mm-sq / 5x10mm-sq', qty:30, unit:'Meter', price:46250, remark:'Estimated On Site Usage', highlight:true },
-        { item:'Dedicated TT/TN Earthing System', desc:'Pure Copper Earth Rod (5/8 inch x 10ft) & Clamp', spec:'Earth Resistance < 4 Ohms (EV Standard)', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Heavy Duty AC Supply Cable', desc:'Cu/XLPE/PVC Multi-core Power Cable', spec:'3x6mm-sq / 5x10mm-sq', qty:30, unit:'Meter', price:46250, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Dedicated TT/TN Earthing System', desc:'Copper-Bonded Earth Rod (5/8 inch x 10ft) & Clamp', spec:'Earth Resistance < 4 Ohms', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
         { item:'uPVC / Metal Conduits & Fittings', desc:'Heavy Duty Protection Conduits, Glands & Trunking', spec:'Fire Retardant Class Heavy Duty', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
         { item:'Main DB AC Integration & Breakers', desc:'High Breaking Capacity 40A-63A Breaker & Sync', spec:'Industrial Grade Breakers', qty:1, unit:'Lot', price:625000, remark:'Estimated On Site Usage', highlight:true },
       ]},
       { name: 'Installation & Engineering', items: [
-        { item:'EV Fast Charger Power Cabling & Setup', desc:'High Current AC Power Cabling, Protection DB & Conduit Dressing', spec:'7kW / 22kW Fast Charger Spec', qty:7, unit:'kW', price:162500, remark:'Certified EV Technicians', highlight:false },
-        { item:'Dedicated Earthing Grounding & Safety Testing', desc:'TT/TN Grounding Rod Installation, Earth Resistance Measurement', spec:'Earth Resistance < 4 Ohms Spec', qty:1, unit:'Lot', price:350000, remark:'Safety Compliance', highlight:false },
-        { item:'Smart Cloud App, RFID & Safety Commissioning', desc:'WiFi/4G App Pairing, RFID Card Programming & Handover', spec:'Full Testing & User Training', qty:1, unit:'Set', price:350000, remark:'Aye Yeik Nyo Certified', highlight:false },
+        { item:'EV Fast Charger Setup & Wiring', desc:'AC Power Cabling & DB Wiring', spec:'Wallbox Setup', qty:7, unit:'kW', price:162500, remark:'Certified EV Technicians', highlight:false },
+        { item:'Dedicated Earthing Grounding', desc:'Earth Rod & Surge Protection', spec:'Earth Resistance < 4 Ohms', qty:1, unit:'Lot', price:350000, remark:'Safety Compliance', highlight:false },
+        { item:'Smart Cloud App & Commissioning', desc:'WiFi App Pairing & Testing', spec:'Full Testing & Handover', qty:1, unit:'Set', price:350000, remark:'Aye Yeik Nyo Certified', highlight:false },
       ]},
       { name: 'Logistics & Site Support', items: [
         { item:'Transportation & Delivery', desc:'Site Logistics & Equipment Handling', spec:'Mandalay & Surrounding Area', qty:1, unit:'Trip', price:250000, remark:'Depend On Site Location', highlight:false },
@@ -2036,18 +2084,18 @@ const SYSTEM_PRESETS = {
         { item:'Solar VFD Control & Protection DB', desc:'Outdoor Weatherproof Control Cabinet', spec:'1000V DC SPD, DC MCB, AC Breaker & Water Sensors', qty:1, unit:'Set', price:950000, remark:'Automatic Level Control', highlight:false },
       ]},
       { name: 'On-Site Usage Materials & Well BOS', items: [
-        { item:'Submersible Flat Waterproof Cable', desc:'Pure Copper Heavy Duty Submersible Cable', spec:'3x4mm-sq / 3x6mm-sq Waterproof', qty:120, unit:'Meter', price:23750, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Submersible Flat Waterproof Cable', desc:'Heavy Duty Submersible Flat Cable', spec:'3x4mm-sq / 3x6mm-sq Waterproof', qty:120, unit:'Meter', price:23750, remark:'Estimated On Site Usage', highlight:true },
         { item:'Solar PV DC Cable', desc:'TUV Certified Solar Double Insulated Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:50, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
         { item:'Ground Mounting Solar Structure', desc:'Hot-Dip Galvanized / Heavy AL Ground Mount Racks', spec:'Ground Array Mounting Spec', qty:6765, unit:'Wp', price:275, remark:'Estimated On Site Usage', highlight:true },
         { item:'Stainless Steel Safety Suspension Wire', desc:'304 Stainless Steel Pump Safety Wire (5mm)', spec:'Heavy Duty 150m Wire & Clamps', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
         { item:'Wellhead Flange & Pressure Pipe Fitting', desc:'Heavy Duty Wellhead Assembly & Non-Return Valve', spec:'2.5 inch / 3 inch High Pressure Set', qty:1, unit:'Set', price:650000, remark:'Estimated On Site Usage', highlight:true },
-        { item:'Deep Earth Grounding & Lightning Kit', desc:'Copper Earth Rod & Lightning Surge Protection', spec:'Earth Resistance < 5 Ohms', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Deep Earth Grounding & Lightning Kit', desc:'Copper-Bonded Earth Rod & Lightning Kit', spec:'Earth Resistance < 5 Ohms', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
       ]},
       { name: 'Installation & Engineering', items: [
-        { item:'Solar Array Ground Structure Mounting', desc:'6.7kWp Ground Structure & DC Pumping Array Wiring', spec:'6.7kWp Solar Array Spec', qty:6765, unit:'Wp', price:250, remark:'Certified Team', highlight:false },
-        { item:'Solar VFD Controller Mounting & Wiring', desc:'5.5kW VFD Panel Mounting, DC/AC Switchgear & Protections', spec:'5.5kW VFD Spec', qty:5.5, unit:'kW', price:150000, remark:'VFD Specialists', highlight:false },
-        { item:'Pump Lowering, Water Pipe Assembly & Wellhead', desc:'Borehole Well Lowering, Submersible Cable Splicing & Pipes', spec:'5.5HP Submersible Pump Spec', qty:5.5, unit:'HP', price:175000, remark:'Pumping Engineering Team', highlight:false },
-        { item:'System Calibration, Water Flow Testing & Handover', desc:'Water Level Sensor Tuning, Dry-run Protection & Flow Testing', spec:'Full Testing & Handover', qty:1, unit:'Set', price:750000, remark:'Testing Certificate & Training', highlight:false },
+        { item:'Solar Array Ground Mounting', desc:'Ground Structure & DC Cabling', spec:'Solar Array Setup', qty:6765, unit:'Wp', price:250, remark:'Certified Team', highlight:false },
+        { item:'Solar VFD Controller Wiring', desc:'VFD Panel Mounting & Protections', spec:'VFD Wiring Spec', qty:5.5, unit:'kW', price:150000, remark:'VFD Specialists', highlight:false },
+        { item:'Pump Lowering & Pipe Assembly', desc:'Well Lowering & Pipe Fitting', spec:'Submersible Pump Setup', qty:5.5, unit:'HP', price:175000, remark:'Pumping Engineering Team', highlight:false },
+        { item:'System Calibration & Flow Testing', desc:'Flow Testing & Sensor Tuning', spec:'Full Commissioning', qty:1, unit:'Set', price:750000, remark:'Testing Certificate', highlight:false },
       ]},
       { name: 'Logistics & Site Logistics', items: [
         { item:'Transportation & Site Logistics', desc:'Pump, Structure & Panel Delivery to Site', spec:'Mandalay / Regional Site Delivery', qty:1, unit:'Trip', price:650000, remark:'Depend On Site Location', highlight:false },
@@ -2066,11 +2114,11 @@ const SYSTEM_PRESETS = {
         { item:'Automatic Water Level Sensor Kit', desc:'Stainless Steel Well Water & Tank Level Probes', spec:'Dry-Run & Overflow Auto Sensing (50m wire)', qty:1, unit:'Set', price:350000, remark:'Intelligent Level Control', highlight:false },
       ]},
       { name: 'On-Site Accessories & Wiring', items: [
-        { item:'Control Wiring & Accessories Kit', desc:'Terminal Blocks, Copper Lugs & Flexible Conduits', spec:'Heavy Duty Industrial Wiring Set', qty:1, unit:'Lot', price:350000, remark:'Estimated On Site Usage', highlight:true },
-        { item:'Grounding & Earth Spike Kit', desc:'Pure Copper Earth Rod (5/8 inch x 6ft) & Bare Wire', spec:'Equipment Surge Grounding', qty:1, unit:'Lot', price:350000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Control Wiring & Accessories Kit', desc:'Terminal Blocks, Lugs & Flexible Conduits', spec:'Heavy Duty Wiring Set', qty:1, unit:'Lot', price:350000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Grounding & Earth Spike Kit', desc:'Copper-Bonded Earth Spike (5/8 inch x 6ft) & Ground Wire', spec:'Surge Grounding Spec', qty:1, unit:'Lot', price:350000, remark:'Estimated On Site Usage', highlight:true },
       ]},
-      { name: 'Engineering & Parameter Setup', items: [
-        { item:'VFD Programming & Parameter Setup', desc:'Motor V/F Curve Matching, MPPT Tracking & Tuning', spec:'Testing & Configuration', qty:1, unit:'Set', price:450000, remark:'Technical Support Included', highlight:false },
+      { name: 'Installation & Engineering', items: [
+        { item:'VFD Programming & Parameter Setup', desc:'Motor Matching & Parameter Tuning', spec:'System Configuration', qty:1, unit:'Set', price:450000, remark:'Technical Support Included', highlight:false },
       ]},
       { name: 'Logistics & Delivery', items: [
         { item:'Delivery & Courier Handling', desc:'Express Courier / Site Delivery', spec:'Myanmar Countrywide Delivery', qty:1, unit:'Set', price:150000, remark:'Depend On Site Location', highlight:false },
@@ -2092,15 +2140,15 @@ const SYSTEM_PRESETS = {
         { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Cable', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:150, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
         { item:'MC4 Solar Connectors', desc:'IP68 Waterproof High Voltage Connectors', spec:'1500V DC / 30A', qty:12, unit:'Pairs', price:23750, remark:'Heavy Duty', highlight:false },
         { item:'Commercial Aluminum Racking System', desc:'AL6005-T5 Heavy Aluminum Rail, Clamps & Hardware', spec:'Roof / Metal Shed Mounting Spec', qty:18450, unit:'Wp', price:215, remark:'Estimated On Site Usage', highlight:true },
-        { item:'Heavy Duty Earth Grounding System', desc:'Multiple Copper Rods & Grounding Enhancement', spec:'Earth Resistance < 3 Ohms Standard', qty:1, unit:'Lot', price:850000, remark:'Estimated On Site Usage', highlight:true },
+        { item:'Heavy Duty Earth Grounding System', desc:'Copper-Bonded Earth Rods & Earth Compound', spec:'Earth Resistance < 3 Ohms', qty:1, unit:'Lot', price:850000, remark:'Estimated On Site Usage', highlight:true },
         { item:'uPVC / Metal Conduits & Cable Trays', desc:'Heavy Duty Conduits, Trays & Cable Ladder', spec:'Industrial Standard', qty:1, unit:'Lot', price:1700000, remark:'Estimated On Site Usage', highlight:true },
         { item:'3-Phase AC Distribution & ATS Panel', desc:'3-Phase 100A Automatic Transfer Switch & Cabling', spec:'Main Switchboard Integration', qty:1, unit:'Lot', price:2375000, remark:'Estimated On Site Usage', highlight:true },
       ]},
       { name: 'Installation & Engineering', items: [
-        { item:'Commercial Solar Array Mounting', desc:'Commercial Roof / Shed Mounting & DC String Cabling', spec:'18.4kWp Array Spec', qty:18450, unit:'Wp', price:250, remark:'Senior Technical Team', highlight:false },
-        { item:'3-Phase Inverter & Main Distribution Setup', desc:'15kW/20kW 3-Phase Inverter, AC ATS & Cable Trays', spec:'15kW Inverter Spec', qty:15, unit:'kW', price:112500, remark:'Senior Electrical Engineers', highlight:false },
-        { item:'Commercial Battery Bank Assembly & Balancing', desc:'20.48kWh Dual Unit Rack Assembly & Heavy Busbars', spec:'20.48kWh Storage Spec', qty:20.5, unit:'kWh', price:35000, remark:'Battery Engineering Specialists', highlight:false },
-        { item:'Commercial System Testing & Handover', desc:'3-Phase Grid Synchronization, Protection Calibration & Training', spec:'Full Commissioning & Certificate', qty:1, unit:'Set', price:1250000, remark:'1-Year Free Inspection', highlight:false },
+        { item:'Commercial Solar Array Mounting', desc:'Structure Assembly & DC Strings', spec:'Commercial PV Array', qty:18450, unit:'Wp', price:250, remark:'Senior Technical Team', highlight:false },
+        { item:'3-Phase Inverter & DB Setup', desc:'Inverter & 3P DB Interconnection', spec:'3-Phase Integration', qty:15, unit:'kW', price:112500, remark:'Senior Electrical Engineers', highlight:false },
+        { item:'Commercial Battery Bank Assembly', desc:'Battery Rack & High-Current Busbars', spec:'Storage Bank Setup', qty:20.5, unit:'kWh', price:35000, remark:'Battery Engineering Specialists', highlight:false },
+        { item:'Commercial Testing & Commissioning', desc:'Grid Synchronization & Testing', spec:'Full Testing & Handover', qty:1, unit:'Set', price:1250000, remark:'1-Year Free Inspection', highlight:false },
       ]},
       { name: 'Logistics & Transportation', items: [
         { item:'Transportation & Material Handling', desc:'Direct Site Delivery & Unloading', spec:'Mandalay & Regional Facility', qty:1, unit:'Trip', price:850000, remark:'Depend On Site Location', highlight:false },
@@ -2108,39 +2156,6 @@ const SYSTEM_PRESETS = {
     ]
   }
 };
-
-function applySystemPreset(presetKey) {
-  const preset = SYSTEM_PRESETS[presetKey];
-  if (!preset) return;
-
-  if (confirm("Load \"" + preset.name + "\" preset?\n\nThis will populate standard Myanmar market items, on-site usage estimates, and warranty terms for this system.")) {
-    sections = JSON.parse(JSON.stringify(preset.sections));
-    docInfo.projectDesc = preset.projectDesc;
-    docInfo.customTitle = '';
-    
-    const descEl = document.getElementById('project-desc');
-    if (descEl) descEl.value = preset.projectDesc;
-
-    updateFooterLabelsAndDefaults(true);
-    updateSystemTitle();
-    render();
-    
-    // Reset dropdown back to default placeholder
-    const selectEl = document.getElementById('system-preset-select');
-    if (selectEl) selectEl.value = '';
-    
-    if (typeof showToast === 'function') {
-      showToast("Loaded \"" + preset.name + "\" successfully!");
-    } else {
-      alert("Loaded \"" + preset.name + "\" successfully!");
-    }
-  }
-}
-
-function resetAutoSystemTitle() {
-  docInfo.customTitle = '';
-  updateSystemTitle();
-}
 
 function defaultData() {
   return [
@@ -2154,15 +2169,15 @@ function defaultData() {
       { item:'Solar PV DC Cable', desc:'TUV Certified Double Insulated Solar Wire', spec:'4mm-sq / 6mm-sq (Red & Black)', qty:60, unit:'Meter', price:16250, remark:'Estimated On Site Usage', highlight:true },
       { item:'MC4 Solar Connectors', desc:'IP68 Waterproof High Voltage Connectors', spec:'1500V DC / 30A', qty:6, unit:'Pairs', price:23750, remark:'Heavy Duty Weatherproof', highlight:false },
       { item:'Solar Mounting Aluminum Rack', desc:'AL6005-T5 Aluminum Rails, Mid/End Clamps & L-Feet', spec:'Roof Mount Racking Spec', qty:7380, unit:'Wp', price:230, remark:'Estimated On Site Usage', highlight:true },
-      { item:'Earth Grounding System', desc:'Copper Rod (5/8 inch x 10ft) & Grounding Compound', spec:'16mm-sq Bare Earth Wire (< 5 Ohms)', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
+      { item:'Earth Grounding System', desc:'Copper-Bonded Earth Rod (5/8 inch x 10ft) & Compound', spec:'16mm-sq Earth Wire (< 5 Ohms)', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
       { item:'uPVC Conduits & Accessories', desc:'Heavy Duty Conduits, Flexible Pipes & Trunking', spec:'Fire Retardant Class 8.5/13.5', qty:1, unit:'Lot', price:950000, remark:'Estimated On Site Usage', highlight:true },
       { item:'AC Distribution & Changeover ATS', desc:'Automatic / Manual ATS (63A) & AC Cabling', spec:'Main DB Interlocking & Load Distribution', qty:1, unit:'Lot', price:1300000, remark:'Estimated On Site Usage', highlight:true },
     ]},
     { name: 'Installation & Engineering', items: [
-      { item:'Solar Array Installation & Mounting', desc:'Mechanical Rail Assembly & DC String Wiring', spec:'Rooftop PV Mounting Spec', qty:7380, unit:'Wp', price:300, remark:'Certified Solar Technicians', highlight:false },
-      { item:'Inverter & AC DB Interconnection', desc:'Inverter Mounting, AC DB Wiring & Grid Sync', spec:'8kW Hybrid Inverter Spec', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
-      { item:'Battery Storage Bank Assembly & BMS Setup', desc:'LiFePO4 Rack Assembly, High-Current DC & BMS Link', spec:'10.24kWh Storage Spec', qty:10.2, unit:'kWh', price:40000, remark:'Battery Specialists', highlight:false },
-      { item:'System Testing, Commissioning & Handover', desc:'Inverter Tuning, Cloud WiFi Setup & Safety Inspection', spec:'Full Testing & Handover', qty:1, unit:'Set', price:650000, remark:'Testing Inspection & 1-Year Free Service', highlight:false },
+      { item:'Solar Array Installation & Mounting', desc:'Roof Rail Assembly & DC Cabling', spec:'PV Array Setup', qty:7380, unit:'Wp', price:300, remark:'Certified Technicians', highlight:false },
+      { item:'Inverter & AC DB Interconnection', desc:'Inverter Mounting & AC DB Wiring', spec:'AC/DC Interconnection', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
+      { item:'Battery Bank Assembly & BMS Setup', desc:'Battery Rack & Smart BMS Link', spec:'DC Storage Wiring', qty:10.2, unit:'kWh', price:40000, remark:'Battery Specialists', highlight:false },
+      { item:'System Testing & Commissioning', desc:'Commissioning, App Setup & Testing', spec:'Full System Testing', qty:1, unit:'Set', price:650000, remark:'1-Year Free Service', highlight:false },
     ]},
     { name: 'Logistics & Site Delivery', items: [
       { item:'Transportation & Logistics', desc:'Site Logistics, Packaging & Equipment Handling', spec:'Mandalay & Surrounding Area', qty:1, unit:'Trip', price:450000, remark:'Depend On Site Location', highlight:false },
@@ -2546,6 +2561,7 @@ function moveItemDown(si, ii) {
 
 // =====================  RENDER TABLE  =====================
 function render() {
+  if (typeof sanitizeDocData === 'function') sections = sanitizeDocData(sections);
   const tbody = document.getElementById('table-body');
   if (!tbody) return;
   tbody.innerHTML = '';
@@ -2799,13 +2815,62 @@ function clearDraft() {
   }
 }
 
+function sanitizeDocData(secList) {
+  if (!Array.isArray(secList)) return secList;
+  return secList.map(sec => {
+    let sName = (sec.name || '').trim();
+    if (sName.toLowerCase().includes('labor') || sName === 'Installation & Engineering Labor') {
+      sName = 'Installation & Engineering';
+    }
+    const items = (sec.items || []).map(it => {
+      let item = it.item || '';
+      let desc = it.desc || '';
+      let spec = it.spec || '';
+      let remark = it.remark || '';
+
+      // 1. Remove all MMK/W and IP annotations
+      const cleanAnnotations = (str) => {
+        return str
+          .replace(/\(~?[\d,.]+\s*MMK\/W\)/gi, '')
+          .replace(/\(IP\s*20:?\s*2\.0M\s*\/\s*IP\s*65:?\s*4\.6M\)/gi, '')
+          .replace(/\(IP\s*20[^)]*\)/gi, '')
+          .replace(/\(IP\s*65[^)]*\)/gi, '')
+          .replace(/\(990-1100\s*MMK\/W\)/gi, '')
+          .replace(/\s{2,}/g, ' ')
+          .trim();
+      };
+
+      item = cleanAnnotations(item);
+      desc = cleanAnnotations(desc);
+      spec = cleanAnnotations(spec);
+      remark = cleanAnnotations(remark);
+
+      // 2. Remove Pure Copper in Earth Grounding
+      if (item.toLowerCase().includes('earth') || item.toLowerCase().includes('grounding') || desc.toLowerCase().includes('earth rod')) {
+        desc = desc.replace(/Pure Copper/gi, 'Copper-Bonded');
+        spec = spec.replace(/Pure Copper/gi, 'Copper-Bonded');
+      }
+
+      // 3. Remove Labor words in items
+      item = item.replace(/Labor/gi, '').replace(/\s{2,}/g, ' ').trim();
+      if (item === 'Solar Array Installation & Mounting Labor' || item === 'Solar PV Array Installation Labor') {
+        item = 'Solar Array Installation & Mounting';
+      }
+
+      return { ...it, item, desc, spec, remark };
+    });
+
+    return { ...sec, name: sName, items };
+  });
+}
+
 function loadDraft() {
   const s = localStorage.getItem('ayn_draft');
   if (s) {
     try {
       const data = JSON.parse(s);
       docInfo = data.docInfo || docInfo;
-      sections = data.sections || defaultData();
+      sections = sanitizeDocData(data.sections || defaultData());
       window._advance = data.advance || 0;
       if (data.validity && document.getElementById('validity-input')) document.getElementById('validity-input').value = data.validity;
       if (data.notice && document.getElementById('notice-input')) document.getElementById('notice-input').value = data.notice;
@@ -2818,7 +2883,7 @@ function loadDraft() {
 
   docInfo.id = generateId('Quotation');
   docInfo.date = todayStr();
-  sections = defaultData();
+  sections = sanitizeDocData(defaultData());
   window._advance = 0;
 }
 
@@ -3444,47 +3509,73 @@ function applyLoadedDocumentData(data) {
 // PDF Document Generator and Export Bundle
 // ----------------------------------------------------------------------------
 function generatePdfDoc() {
-  readHeader();
   const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-  const pw = doc.internal.pageSize.getWidth();
-  const ph = doc.internal.pageSize.getHeight();
-  const margin = 10;
-  const contentWidth = pw - margin * 2;
+  const doc = new jsPDF({
+    orientation: 'portrait',
+    unit: 'mm',
+    format: 'a4',
+    compress: true
+  });
+
+  const pw = doc.internal.pageSize.getWidth();   // 210mm
+  const ph = doc.internal.pageSize.getHeight();  // 297mm
+  const margin = 8; // Compact 8mm margin
+  const contentWidth = pw - margin * 2; // 194mm
 
   const isInvoice = (docInfo.type === 'Invoice');
 
+  // Count total table items to dynamically scale font size & cell padding
+  let totalRows = 0;
+  sections.forEach(sec => {
+    totalRows += 1 + (sec.items ? sec.items.length : 0); // 1 header + N items
+  });
+  totalRows += 3; // Total Price, Advance, Grand Total
+
+  // Dynamic scaling parameters for Guaranteed Single A4 Portrait Fit
+  let tblFontSize = 6.4;
+  let tblPadding = 0.8;
+  if (totalRows > 24) {
+    tblFontSize = 5.2;
+    tblPadding = 0.4;
+  } else if (totalRows > 18) {
+    tblFontSize = 5.8;
+    tblPadding = 0.55;
+  } else if (totalRows > 14) {
+    tblFontSize = 6.1;
+    tblPadding = 0.68;
+  }
+
   // 1. Executive Card Background Container
   const cardTop = margin;
-  const cardHeight = 36;
+  const cardHeight = 31;
   doc.setFillColor(248, 250, 252);
-  doc.roundedRect(margin, cardTop, contentWidth, cardHeight, 2.5, 2.5, 'F');
+  doc.roundedRect(margin, cardTop, contentWidth, cardHeight, 2, 2, 'F');
   doc.setDrawColor(226, 232, 240);
-  doc.setLineWidth(0.3);
-  doc.roundedRect(margin, cardTop, contentWidth, cardHeight, 2.5, 2.5, 'S');
+  doc.setLineWidth(0.25);
+  doc.roundedRect(margin, cardTop, contentWidth, cardHeight, 2, 2, 'S');
 
   // Column 1: Company Info (Left)
-  doc.setFontSize(13);
+  doc.setFontSize(12);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text("Aye Yeik Nyo Co., Ltd.", margin + 4, cardTop + 7);
+  doc.text("Aye Yeik Nyo Co., Ltd.", margin + 3.5, cardTop + 6);
 
-  doc.setFontSize(7.5);
+  doc.setFontSize(7);
   doc.setFont(undefined, 'normal');
   doc.setTextColor(71, 85, 105);
 
   const compAddr1 = docInfo.companyAddress1 || "D6-403, 1(A) street, Mingalar Yankin Housing,";
   const compAddr2 = docInfo.companyAddress2 || "Patheingyi Township, Mandalay, Myanmar.";
-  doc.text(`Address: ${compAddr1}`, margin + 4, cardTop + 13.5);
-  doc.text(`         ${compAddr2}`, margin + 4, cardTop + 17.5);
-  doc.text(`Phone:   ${docInfo.companyPhone || "09752749102"}`, margin + 4, cardTop + 22.5);
-  doc.text(`Email:   ${docInfo.companyEmail || "hello@aynts.onmicrosoft.com"}`, margin + 4, cardTop + 27);
+  doc.text(`Address: ${compAddr1}`, margin + 3.5, cardTop + 11.5);
+  doc.text(`         ${compAddr2}`, margin + 3.5, cardTop + 15);
+  doc.text(`Phone:   ${docInfo.companyPhone || "09752749102"}`, margin + 3.5, cardTop + 19.5);
+  doc.text(`Email:   ${docInfo.companyEmail || "hello@aynts.onmicrosoft.com"}`, margin + 3.5, cardTop + 23.5);
 
   // Column 2: Center Logo
-  const logoW = 28;
-  const logoH = 28;
+  const logoW = 24;
+  const logoH = 24;
   const logoX = (pw - logoW) / 2;
-  const logoY = cardTop + 4;
+  const logoY = cardTop + 3.5;
   try {
     doc.addImage(LOGO_BASE64, 'PNG', logoX, logoY, logoW, logoH, undefined, 'FAST');
   } catch (e) {
@@ -3492,25 +3583,25 @@ function generatePdfDoc() {
   }
 
   // Column 3: Quotation / Invoice Document Info (Right)
-  doc.setFontSize(14);
+  doc.setFontSize(13);
   doc.setFont(undefined, 'bold');
   if (isInvoice) {
     doc.setTextColor(14, 116, 144);
-    doc.text("INVOICE", pw - margin - 4, cardTop + 7.5, { align: 'right' });
+    doc.text("INVOICE", pw - margin - 3.5, cardTop + 6.5, { align: 'right' });
   } else {
     doc.setTextColor(16, 185, 129);
-    doc.text("QUOTATION", pw - margin - 4, cardTop + 7.5, { align: 'right' });
+    doc.text("QUOTATION", pw - margin - 3.5, cardTop + 6.5, { align: 'right' });
   }
 
-  doc.setFontSize(7.5);
+  doc.setFontSize(7);
   doc.setFont(undefined, 'normal');
   doc.setTextColor(71, 85, 105);
-  doc.text(`${isInvoice ? "Invoice ID:" : "Quote ID:"}  ${docInfo.id || ""}`, pw - margin - 4, cardTop + 16, { align: 'right' });
-  doc.text(`Date:      ${docInfo.date || todayStr()}`, pw - margin - 4, cardTop + 22, { align: 'right' });
+  doc.text(`${isInvoice ? "Invoice ID:" : "Quote ID:"}  ${docInfo.id || ""}`, pw - margin - 3.5, cardTop + 14, { align: 'right' });
+  doc.text(`Date:      ${docInfo.date || todayStr()}`, pw - margin - 3.5, cardTop + 19, { align: 'right' });
 
   // 2. Client & Project Info Header
-  const headerBottomY = cardTop + cardHeight + 4.5;
-  doc.setFontSize(7.5);
+  const headerBottomY = cardTop + cardHeight + 3.5;
+  doc.setFontSize(7);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(15, 23, 42);
   doc.text("Prepared For:", margin, headerBottomY);
@@ -3523,23 +3614,23 @@ function generatePdfDoc() {
   if (docInfo.clientAddress) clientLines.push(docInfo.clientAddress);
   if (docInfo.clientPhone) clientLines.push(docInfo.clientPhone);
 
-  let curClientY = headerBottomY + 4;
+  let curClientY = headerBottomY + 3.5;
   clientLines.forEach(l => {
     doc.text(l, margin, curClientY);
-    curClientY += 3.5;
+    curClientY += 3.2;
   });
 
-  let curProjY = headerBottomY + 4;
+  let curProjY = headerBottomY + 3.5;
   if (docInfo.projectDesc) {
     const pLines = doc.splitTextToSize(docInfo.projectDesc, 85);
     doc.text(pLines, pw - margin, curProjY, { align: 'right' });
-    curProjY += pLines.length * 3.5;
+    curProjY += pLines.length * 3.2;
   }
 
   // 3. System Title Banner
-  const titleY = Math.max(curClientY, curProjY) + 3;
+  const titleY = Math.max(curClientY, curProjY) + 2.5;
   const sysTitle = getSystemTitle();
-  doc.setFontSize(9.5);
+  doc.setFontSize(8.8);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(15, 23, 42);
   doc.text(sysTitle, pw / 2, titleY, { align: 'center' });
@@ -3553,7 +3644,7 @@ function generatePdfDoc() {
     body.push([{
       content: sec.name,
       colSpan: 9,
-      styles: { fillColor: [16, 185, 129], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: 7 }
+      styles: { fillColor: [16, 185, 129], textColor: [0, 0, 0], fontStyle: 'bold', fontSize: tblFontSize + 0.3 }
     }]);
 
     sec.items.forEach(it => {
@@ -3604,17 +3695,17 @@ function generatePdfDoc() {
   doc.autoTable({
     head,
     body,
-    startY: titleY + 4.5,
+    startY: titleY + 3.5,
     margin: { left: margin, right: margin },
-    styles: { fontSize: 7, cellPadding: 1.3, overflow: 'linebreak' },
-    headStyles: { fillColor: [226, 232, 240], textColor: [15, 23, 42], fontSize: 7, fontStyle: 'bold' },
+    styles: { fontSize: tblFontSize, cellPadding: tblPadding, overflow: 'linebreak' },
+    headStyles: { fillColor: [226, 232, 240], textColor: [15, 23, 42], fontSize: tblFontSize, fontStyle: 'bold' },
     columnStyles: {
-      0: { cellWidth: 8, halign: 'center' },   // No
-      1: { cellWidth: 23 },                    // Item
-      2: { cellWidth: 32 },                    // Description
-      3: { cellWidth: 21 },                    // Spec
-      4: { cellWidth: 12, halign: 'right' },   // Qty
-      5: { cellWidth: 12, halign: 'center' },  // Unit
+      0: { cellWidth: 7, halign: 'center' },   // No
+      1: { cellWidth: 24 },                    // Item
+      2: { cellWidth: 35 },                    // Description
+      3: { cellWidth: 23 },                    // Spec
+      4: { cellWidth: 11, halign: 'right' },   // Qty
+      5: { cellWidth: 10, halign: 'center' },  // Unit
       6: { cellWidth: 22, halign: 'right' },   // Price
       7: { cellWidth: 24, halign: 'right' },   // Amount
       8: { cellWidth: 'auto' }                 // Remark
@@ -3622,9 +3713,9 @@ function generatePdfDoc() {
     theme: 'grid'
   });
 
-  // 5. PDF Footer: Validity / Due Date, Terms & Signatures
-  const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : (titleY + 130);
-  let curY = finalY + 4.5;
+  // 5. PDF Footer: Validity / Due Date, Terms & Signatures (Fitted to 1 page)
+  const finalY = doc.lastAutoTable ? doc.lastAutoTable.finalY : (titleY + 110);
+  let curY = finalY + 3.5;
 
   const footerConfig = isInvoice ? DEFAULT_FOOTER_INVOICE : DEFAULT_FOOTER_QUOTATION;
 
@@ -3636,7 +3727,7 @@ function generatePdfDoc() {
     .replace(/^Payment Due:\s*/i, '')
     .trim();
 
-  doc.setFontSize(7);
+  doc.setFontSize(6.5);
   doc.setFont(undefined, 'bold');
   if (isInvoice) {
     doc.setTextColor(14, 116, 144);
@@ -3644,18 +3735,18 @@ function generatePdfDoc() {
     doc.setTextColor(4, 120, 87);
   }
   doc.text(`${footerConfig.validityLabel} ${cleanValidityText}`, margin, curY);
-  curY += 4.5;
+  curY += 3.5;
 
   // Notice & Terms Headers
-  doc.setFontSize(7.5);
+  doc.setFontSize(6.8);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(15, 118, 110);
   doc.text(`${footerConfig.noticeHeading}:`, margin, curY);
-  doc.text(`${footerConfig.termsHeading}:`, 110, curY);
-  curY += 3.5;
+  doc.text(`${footerConfig.termsHeading}:`, 108, curY);
+  curY += 3;
 
   // Content
-  doc.setFontSize(6.5);
+  doc.setFontSize(5.8);
   doc.setFont(undefined, 'normal');
   doc.setTextColor(51, 65, 85);
   const noticeEl = document.getElementById('notice-input');
@@ -3663,59 +3754,50 @@ function generatePdfDoc() {
   const noticeLines = doc.splitTextToSize(noticeEl ? noticeEl.value : footerConfig.notice, 92);
   const termsLines = doc.splitTextToSize(termsEl ? termsEl.value : footerConfig.terms, 92);
   doc.text(noticeLines, margin, curY);
-  doc.text(termsLines, 110, curY);
+  doc.text(termsLines, 108, curY);
 
-  const termsHeight = Math.max(noticeLines.length, termsLines.length) * 2.8;
-  curY += termsHeight + 4;
-
-  // Signature Area
-  let sigBoxY = curY;
-  if (sigBoxY + 28 > 290) {
-    doc.addPage();
-    sigBoxY = 20;
-  } else {
-    sigBoxY = Math.max(sigBoxY, 252);
-  }
+  // Position Signature Box tightly at bottom of single A4 page
+  const sigBoxY = Math.min(ph - margin - 20, Math.max(curY + Math.max(noticeLines.length, termsLines.length) * 2.4 + 4, 252));
 
   // Left Signature
   doc.setDrawColor(100, 116, 139);
-  doc.setLineWidth(0.3);
+  doc.setLineWidth(0.25);
   doc.setLineDash([1, 1]);
-  doc.line(margin + 5, sigBoxY + 12, margin + 65, sigBoxY + 12);
+  doc.line(margin + 5, sigBoxY + 10, margin + 60, sigBoxY + 10);
   doc.setLineDash([]);
-  doc.setFontSize(7.5);
+  doc.setFontSize(7);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text(footerConfig.clientSigTitle, margin + 35, sigBoxY + 16, { align: 'center' });
-  doc.setFontSize(6.5);
+  doc.text(footerConfig.clientSigTitle, margin + 32, sigBoxY + 13.5, { align: 'center' });
+  doc.setFontSize(6);
   doc.setFont(undefined, 'normal');
   doc.setTextColor(100, 116, 139);
-  doc.text(footerConfig.clientSigSub, margin + 35, sigBoxY + 20, { align: 'center' });
+  doc.text(footerConfig.clientSigSub, margin + 32, sigBoxY + 17, { align: 'center' });
 
   // Right Signature: Aye Yeik Nyo Co., Ltd.
   doc.setDrawColor(16, 185, 129);
-  doc.setLineWidth(0.5);
-  doc.circle(pw - margin - 35, sigBoxY + 5, 8);
-  doc.setFontSize(5.5);
+  doc.setLineWidth(0.4);
+  doc.circle(pw - margin - 32, sigBoxY + 4, 7);
+  doc.setFontSize(5);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(16, 185, 129);
-  doc.text("AYN SEAL", pw - margin - 35, sigBoxY + 4, { align: 'center' });
-  doc.setFontSize(4.5);
-  doc.text("Aye Yeik Nyo", pw - margin - 35, sigBoxY + 7, { align: 'center' });
+  doc.text("AYN SEAL", pw - margin - 32, sigBoxY + 3.2, { align: 'center' });
+  doc.setFontSize(4);
+  doc.text("Aye Yeik Nyo", pw - margin - 32, sigBoxY + 5.8, { align: 'center' });
 
   doc.setDrawColor(100, 116, 139);
-  doc.setLineWidth(0.3);
+  doc.setLineWidth(0.25);
   doc.setLineDash([1, 1]);
-  doc.line(pw - margin - 65, sigBoxY + 17, pw - margin - 5, sigBoxY + 17);
+  doc.line(pw - margin - 60, sigBoxY + 14, pw - margin - 5, sigBoxY + 14);
   doc.setLineDash([]);
-  doc.setFontSize(7.5);
+  doc.setFontSize(7);
   doc.setFont(undefined, 'bold');
   doc.setTextColor(15, 23, 42);
-  doc.text("Aye Yeik Nyo Co., Ltd.", pw - margin - 35, sigBoxY + 21, { align: 'center' });
-  doc.setFontSize(6.5);
+  doc.text("Aye Yeik Nyo Co., Ltd.", pw - margin - 32, sigBoxY + 17.5, { align: 'center' });
+  doc.setFontSize(6);
   doc.setFont(undefined, 'normal');
   doc.setTextColor(100, 116, 139);
-  doc.text("Authorized Person's Signature & Seal", pw - margin - 35, sigBoxY + 25, { align: 'center' });
+  doc.text("Authorized Person's Signature & Seal", pw - margin - 32, sigBoxY + 21, { align: 'center' });
 
   // Filename calculation
   const cleanType = (docInfo.type || 'Document').trim();
