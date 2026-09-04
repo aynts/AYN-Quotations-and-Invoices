@@ -1911,15 +1911,11 @@ function onDocTypeChange() {
 }
 
 // =====================  SYSTEM TITLE & CAPACITY PARSING  =====================
-function getSystemTitle() {
-  if (docInfo && docInfo.customTitle && docInfo.customTitle.trim()) {
-    return docInfo.customTitle.trim();
-  }
-
+function calcSystemMetrics() {
   let solarWp = 0;
   let inverterKw = 0;
   let batteryKwh = 0;
-  let evChargerKw = 0;
+  let evKw = 0;
   let pumpHp = 0;
   let pumpKw = 0;
   let vfdKw = 0;
@@ -1937,110 +1933,89 @@ function getSystemTitle() {
 
         if (name.includes('solar') && name.includes('panel')) {
           hasSolar = true;
-          const m = spec.match(/([\d.]+)\s*w/i);
+          const m = spec.match(/([\d.]+)\s*w(?:p)?\b/i) || spec.match(/([\d.]+)\s*w/i);
           if (m) solarWp += parseFloat(m[1]) * qty;
         } else if (name.includes('ev') || name.includes('charger') || name.includes('wallbox')) {
           hasEv = true;
-          const m = spec.match(/([\d.]+)\s*kw/i);
-          if (m) evChargerKw = Math.max(evChargerKw, parseFloat(m[1]));
+          const m = spec.match(/([\d.]+)\s*kw\b/i) || spec.match(/([\d.]+)\s*kw/i);
+          if (m) evKw = Math.max(evKw, parseFloat(m[1]) * qty);
         } else if (name.includes('pump') && (name.includes('submersible') || name.includes('borehole') || name.includes('water'))) {
           hasPump = true;
-          const mh = spec.match(/([\d.]+)\s*hp/i);
-          const mk = spec.match(/([\d.]+)\s*kw/i);
+          const mh = spec.match(/([\d.]+)\s*hp\b/i);
+          const mk = spec.match(/([\d.]+)\s*kw\b/i);
           if (mh) pumpHp = Math.max(pumpHp, parseFloat(mh[1]));
           if (mk) pumpKw = Math.max(pumpKw, parseFloat(mk[1]));
         } else if (name.includes('vfd') || name.includes('pump inverter') || name.includes('frequency drive')) {
           hasVfd = true;
-          const mk = spec.match(/([\d.]+)\s*kw/i);
-          if (mk) vfdKw = Math.max(vfdKw, parseFloat(mk[1]));
+          const mk = spec.match(/([\d.]+)\s*kw\b/i) || spec.match(/([\d.]+)\s*kw/i);
+          if (mk) vfdKw = Math.max(vfdKw, parseFloat(mk[1]) * qty);
         } else if (name.includes('inverter')) {
-          const m = spec.match(/([\d.]+)\s*kw/i);
+          const m = spec.match(/([\d.]+)\s*kw\b/i) || spec.match(/([\d.]+)\s*kw/i);
           if (m) inverterKw += parseFloat(m[1]) * qty;
         } else if (name.includes('battery')) {
-          const mv = spec.match(/([\d.]+)\s*v/i);
-          const ma = spec.match(/([\d.]+)\s*ah/i);
+          const mv = spec.match(/([\d.]+)\s*v\b/i);
+          const ma = spec.match(/([\d.]+)\s*ah\b/i);
           if (mv && ma) {
             batteryKwh += (parseFloat(mv[1]) * parseFloat(ma[1]) / 1000) * qty;
+          } else {
+            const mkwh = spec.match(/([\d.]+)\s*kwh\b/i) || spec.match(/([\d.]+)\s*kwh/i);
+            if (mkwh) batteryKwh += parseFloat(mkwh[1]) * qty;
           }
         }
       });
     });
   }
 
-  const solarStr = solarWp >= 1000 ? (solarWp / 1000).toFixed(1).replace(/\.0$/, '') + 'kWp' : solarWp + 'Wp';
-  const inverterStr = (inverterKw % 1 === 0) ? inverterKw.toString() : inverterKw.toFixed(1);
-  const batteryStr = (batteryKwh % 1 === 0) ? batteryKwh.toString() : (Math.round(batteryKwh * 10) / 10).toString();
+  return { solarWp, inverterKw, batteryKwh, evKw, pumpHp, pumpKw, vfdKw, hasEv, hasPump, hasVfd, hasSolar };
+}
 
-  // Smart Product Detection
-  if (hasEv && !hasSolar && !hasPump) {
-    return evChargerKw > 0 ? (evChargerKw + 'kW Smart EV Fast Charger System') : 'Smart EV Fast Charger System';
+function getSystemTitle() {
+  if (docInfo && docInfo.customTitle && docInfo.customTitle.trim()) {
+    return docInfo.customTitle.trim();
   }
 
-  if (hasPump && hasVfd) {
-    const pumpStr = pumpHp > 0 ? (pumpHp + 'HP (' + (pumpKw || (pumpHp * 0.75).toFixed(1)) + 'kW)') : (pumpKw > 0 ? pumpKw + 'kW' : '');
-    const solStr = solarWp > 0 ? (' with ' + solarStr + ' Solar Array') : '';
+  const m = calcSystemMetrics();
+
+  const solarStr = m.solarWp >= 1000 ? (m.solarWp / 1000).toFixed(2).replace(/\.?0+$/, '') + 'kWp' : m.solarWp + 'Wp';
+  const inverterStr = (m.inverterKw % 1 === 0) ? m.inverterKw.toString() : m.inverterKw.toFixed(1);
+  const batteryStr = (m.batteryKwh % 1 === 0) ? m.batteryKwh.toString() : (Math.round(m.batteryKwh * 10) / 10).toString();
+
+  // 1. Standalone Smart EV Fast Charger
+  if (m.hasEv && !m.hasSolar && !m.hasPump) {
+    return m.evKw > 0 ? (m.evKw + 'kW Smart EV Fast Charger System') : 'Smart EV Fast Charger System';
+  }
+
+  // 2. Solar Deep Well Water Pump & VFD
+  if (m.hasPump && m.hasVfd) {
+    const pumpStr = m.pumpHp > 0 ? (m.pumpHp + 'HP (' + (m.pumpKw || (m.pumpHp * 0.75).toFixed(1)) + 'kW)') : (m.pumpKw > 0 ? m.pumpKw + 'kW' : '');
+    const solStr = m.solarWp > 0 ? (' with ' + solarStr + ' Solar Array') : '';
     return (pumpStr + ' Solar Deep Well Pumping & VFD System' + solStr).trim();
   }
 
-  if (hasVfd && !hasSolar && !hasPump) {
-    return vfdKw > 0 ? (vfdKw + 'kW Solar Pump VFD Controller System') : 'Solar Pump VFD Controller System';
+  // 3. Standalone Solar Pump VFD Controller
+  if (m.hasVfd && !m.hasSolar && !m.hasPump) {
+    return m.vfdKw > 0 ? (m.vfdKw + 'kW Solar Pump VFD Controller System') : 'Solar Pump VFD Controller System';
   }
 
-  // Hybrid Solar or Multi-product Combination
+  // 4. Hybrid / On-Grid Solar System (Standard Professional Format)
+  if (m.solarWp > 0 && m.inverterKw > 0) {
+    let base = solarStr + ' / ' + inverterStr + 'kW Hybrid Solar System';
+    if (m.batteryKwh > 0) {
+      base += ' with ' + batteryStr + 'kWh Battery';
+    }
+    if (m.hasEv) {
+      base += ' & ' + (m.evKw > 0 ? m.evKw + 'kW ' : '') + 'EV Charger';
+    }
+    return base;
+  }
+
   const parts = [];
-  if (inverterKw > 0) parts.push(inverterStr + 'kW Inverter');
-  if (batteryKwh > 0) parts.push(batteryStr + 'kWh Battery');
-  if (solarWp > 0) parts.push(solarStr + ' Solar System');
-  if (hasEv) parts.push((evChargerKw > 0 ? evChargerKw + 'kW ' : '') + 'EV Charger');
+  if (m.solarWp > 0) parts.push(solarStr + ' Solar System');
+  if (m.inverterKw > 0) parts.push(inverterStr + 'kW Inverter');
+  if (m.batteryKwh > 0) parts.push(batteryStr + 'kWh Battery');
+  if (m.hasEv) parts.push((m.evKw > 0 ? m.evKw + 'kW ' : '') + 'EV Charger');
 
-  return parts.join(' and ') || 'Solar System';
-}
-
-function calcSystemMetrics() {
-  let solarWp = 0;
-  let inverterKw = 0;
-  let batteryKwh = 0;
-  let evKw = 0;
-  let pumpHp = 0;
-  let pumpKw = 0;
-  let vfdKw = 0;
-
-  if (Array.isArray(sections)) {
-    sections.forEach(sec => {
-      (sec.items || []).forEach(it => {
-        const name = (it.item || '').toLowerCase() + ' ' + (it.desc || '').toLowerCase();
-        const spec = (it.spec || '').toLowerCase();
-        const qty = it.qty || 0;
-
-        if (name.includes('solar') && name.includes('panel')) {
-          const m = spec.match(/([\d.]+)\s*w/i);
-          if (m) solarWp += parseFloat(m[1]) * qty;
-        } else if (name.includes('ev') || name.includes('charger') || name.includes('wallbox')) {
-          const m = spec.match(/([\d.]+)\s*kw/i);
-          if (m) evKw = Math.max(evKw, parseFloat(m[1]) * qty);
-        } else if (name.includes('pump') && (name.includes('submersible') || name.includes('water'))) {
-          const mh = spec.match(/([\d.]+)\s*hp/i);
-          const mk = spec.match(/([\d.]+)\s*kw/i);
-          if (mh) pumpHp = Math.max(pumpHp, parseFloat(mh[1]));
-          if (mk) pumpKw = Math.max(pumpKw, parseFloat(mk[1]));
-        } else if (name.includes('vfd') || name.includes('pump inverter')) {
-          const mk = spec.match(/([\d.]+)\s*kw/i);
-          if (mk) vfdKw = Math.max(vfdKw, parseFloat(mk[1]) * qty);
-        } else if (name.includes('inverter')) {
-          const m = spec.match(/([\d.]+)\s*kw/i);
-          if (m) inverterKw += parseFloat(m[1]) * qty;
-        } else if (name.includes('battery')) {
-          const mv = spec.match(/([\d.]+)\s*v/i);
-          const ma = spec.match(/([\d.]+)\s*ah/i);
-          if (mv && ma) {
-            batteryKwh += (parseFloat(mv[1]) * parseFloat(ma[1]) / 1000) * qty;
-          }
-        }
-      });
-    });
-  }
-
-  return { solarWp, inverterKw, batteryKwh, evKw, pumpHp, pumpKw, vfdKw };
+  return parts.join(' with ') || 'Solar System';
 }
 
 function calcSolarWp() {
