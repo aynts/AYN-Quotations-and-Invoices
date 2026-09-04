@@ -1132,13 +1132,167 @@ tr.summary-row-grand td {
   .signature-grid { flex-direction: column; gap: 28px; align-items: center; padding: 0; }
 }
 
+/* ========= SINGLE A4 PORTRAIT PRINT & AUTO-SCALING ========= */
+@page {
+  size: A4 portrait;
+  margin: 6mm 8mm;
+}
+
 @media print {
-  body { background: #ffffff; }
-  .container { box-shadow: none; padding: 0; margin: 0; max-width: 100%; }
-  .toolbar, .col-action, th.col-action { display: none !important; }
-  .doc-header input, .doc-header textarea, .doc-header select, table.main-table input {
+  html, body {
+    width: 210mm !important;
+    height: auto !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 11px !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
     border: none !important;
-    background: transparent !important;
+  }
+
+  .toolbar, 
+  .modal-backdrop, 
+  .toast-notice, 
+  .btn-auto-title, 
+  .btn-add-section, 
+  .add-item-row, 
+  .add-section-row, 
+  .col-action, 
+  table.main-table th.col-action, 
+  table.main-table td.col-action,
+  .btn-del,
+  .btn-del-section,
+  .btn-move,
+  .hl-cb {
+    display: none !important;
+  }
+
+  .doc-header-top {
+    padding: 6px 10px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .doc-left h2 {
+    font-size: 16px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .doc-left p, .company-info-row {
+    margin-bottom: 2px !important;
+    font-size: 10.5px !important;
+  }
+
+  .doc-center img {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .doc-right h3 {
+    font-size: 17px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .doc-header-bottom {
+    margin: 6px 0 !important;
+    padding-top: 4px !important;
+  }
+
+  .system-title-container {
+    margin: 6px 0 8px !important;
+  }
+
+  .system-title {
+    font-size: 13.5px !important;
+    padding: 1px 6px !important;
+  }
+
+  .table-responsive {
+    margin-bottom: 8px !important;
+  }
+
+  table.main-table {
+    font-size: 10.5px !important;
+  }
+
+  table.main-table th, 
+  table.main-table td {
+    padding: 2.5px 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  table.main-table input[type="text"],
+  table.main-table input[type="number"] {
+    font-size: 10.5px !important;
+  }
+
+  tr.section-header td {
+    padding: 3px 6px !important;
+    font-size: 11px !important;
+  }
+
+  .doc-footer {
+    margin-top: 6px !important;
+    padding-top: 6px !important;
+  }
+
+  .validity-tag {
+    margin-bottom: 5px !important;
+    padding: 3px 6px !important;
+    font-size: 10.5px !important;
+  }
+
+  .terms-box {
+    gap: 10px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .terms-col h4 {
+    font-size: 11px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .terms-box textarea {
+    font-size: 9.5px !important;
+    line-height: 1.25 !important;
+    height: auto !important;
+  }
+
+  .signature-grid {
+    margin-top: 8px !important;
+    gap: 20px !important;
+  }
+
+  .sig-block {
+    padding-top: 4px !important;
+  }
+
+  .sig-line {
+    margin-bottom: 3px !important;
+  }
+
+  .sig-title {
+    font-size: 11px !important;
+  }
+
+  .sig-sub {
+    font-size: 9.5px !important;
+  }
+
+  .sig-seal {
+    width: 62px !important;
+    height: 62px !important;
+    font-size: 9px !important;
+    top: -16px !important;
   }
 }
   
@@ -1208,8 +1362,168 @@ tr.summary-row-grand td {
   border-color: #64748b;
 }
 
+/* ========= SINGLE A4 PORTRAIT PRINT & AUTO-SCALING ========= */
+@page {
+  size: A4 portrait;
+  margin: 6mm 8mm;
+}
+
 @media print {
-  .btn-auto-title { display: none !important; }
+  html, body {
+    width: 210mm !important;
+    height: auto !important;
+    max-height: 297mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    font-size: 11px !important;
+  }
+
+  .container {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .toolbar, 
+  .modal-backdrop, 
+  .toast-notice, 
+  .btn-auto-title, 
+  .btn-add-section, 
+  .add-item-row, 
+  .add-section-row, 
+  .col-action, 
+  table.main-table th.col-action, 
+  table.main-table td.col-action,
+  .btn-del,
+  .btn-del-section,
+  .btn-move,
+  .hl-cb {
+    display: none !important;
+  }
+
+  .doc-header-top {
+    padding: 6px 10px !important;
+    margin-bottom: 6px !important;
+  }
+
+  .doc-left h2 {
+    font-size: 16px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .doc-left p, .company-info-row {
+    margin-bottom: 2px !important;
+    font-size: 10.5px !important;
+  }
+
+  .doc-center img {
+    width: 68px !important;
+    height: 68px !important;
+  }
+
+  .doc-right h3 {
+    font-size: 17px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .doc-header-bottom {
+    margin: 6px 0 !important;
+    padding-top: 4px !important;
+  }
+
+  .system-title-container {
+    margin: 6px 0 8px !important;
+  }
+
+  .system-title {
+    font-size: 13.5px !important;
+    padding: 1px 6px !important;
+  }
+
+  .table-responsive {
+    margin-bottom: 8px !important;
+  }
+
+  table.main-table {
+    font-size: 10.5px !important;
+  }
+
+  table.main-table th, 
+  table.main-table td {
+    padding: 2.5px 4px !important;
+    line-height: 1.2 !important;
+  }
+
+  table.main-table input[type="text"],
+  table.main-table input[type="number"] {
+    font-size: 10.5px !important;
+  }
+
+  tr.section-header td {
+    padding: 3px 6px !important;
+    font-size: 11px !important;
+  }
+
+  .doc-footer {
+    margin-top: 6px !important;
+    padding-top: 6px !important;
+  }
+
+  .validity-tag {
+    margin-bottom: 5px !important;
+    padding: 3px 6px !important;
+    font-size: 10.5px !important;
+  }
+
+  .terms-box {
+    gap: 10px !important;
+    margin-bottom: 8px !important;
+  }
+
+  .terms-col h4 {
+    font-size: 11px !important;
+    margin-bottom: 3px !important;
+  }
+
+  .terms-box textarea {
+    font-size: 9.5px !important;
+    line-height: 1.25 !important;
+    height: auto !important;
+  }
+
+  .signature-grid {
+    margin-top: 8px !important;
+    gap: 20px !important;
+  }
+
+  .sig-block {
+    padding-top: 4px !important;
+  }
+
+  .sig-line {
+    margin-bottom: 3px !important;
+  }
+
+  .sig-title {
+    font-size: 11px !important;
+  }
+
+  .sig-sub {
+    font-size: 9.5px !important;
+  }
+
+  .sig-seal {
+    width: 62px !important;
+    height: 62px !important;
+    font-size: 9px !important;
+    top: -16px !important;
+  }
 }
 
 </style>
@@ -1660,7 +1974,7 @@ const SYSTEM_PRESETS = {
     projectDesc: '7.38kWp / 8kW Hybrid Solar Energy Storage System Installation for Generic Residential Project',
     sections: [
       { name: 'Main Equipment & Inverter / Battery System', items: [
-        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:12, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
+        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:12, unit:'Pcs', price:645000, remark:'10-12 Years Warranty', highlight:false },
         { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi Hybrid Inverter', spec:'8kW Single / Three Phase', qty:1, unit:'Unit', price:4600000, remark:'3-5 Years Manufacturer Warranty', highlight:false },
         { item:'Lithium Battery Storage', desc:'LiFePO4 Solar Energy Storage (Smart BMS)', spec:'51.2V 200Ah (10.24kWh)', qty:1, unit:'Unit', price:8800000, remark:'3-5 Years Warranty', highlight:false },
         { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'Dual Layer Protection Enclosure', highlight:false },
@@ -1673,9 +1987,9 @@ const SYSTEM_PRESETS = {
         { item:'uPVC Conduits & Accessories', desc:'Heavy Duty Conduits, Flexible Pipes & Trunking', spec:'Fire Retardant Class 8.5/13.5', qty:1, unit:'Lot', price:950000, remark:'Estimated On Site Usage', highlight:true },
         { item:'AC Distribution & Changeover ATS', desc:'Automatic / Manual ATS (63A) & AC Cabling', spec:'Main DB Interlocking & Load Distribution', qty:1, unit:'Lot', price:1300000, remark:'Estimated On Site Usage', highlight:true },
       ]},
-      { name: 'Installation & Engineering Labor', items: [
-        { item:'Solar Array Installation & Mounting Labor', desc:'Mechanical Rail Assembly & DC String Wiring', spec:'Rooftop PV Mounting Spec', qty:7380, unit:'Wp', price:300, remark:'Certified Solar Technicians', highlight:false },
-        { item:'Inverter & AC DB Interconnection Labor', desc:'Inverter Mounting, AC DB Wiring & Grid Sync', spec:'8kW Hybrid Inverter Spec', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
+      { name: 'Installation & Engineering', items: [
+        { item:'Solar Array Installation & Mounting', desc:'Mechanical Rail Assembly & DC String Wiring', spec:'Rooftop PV Mounting Spec', qty:7380, unit:'Wp', price:300, remark:'Certified Solar Technicians', highlight:false },
+        { item:'Inverter & AC DB Interconnection', desc:'Inverter Mounting, AC DB Wiring & Grid Sync', spec:'8kW Hybrid Inverter Spec', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
         { item:'Battery Storage Bank Assembly & BMS Setup', desc:'LiFePO4 Rack Assembly, High-Current DC & BMS Link', spec:'10.24kWh Storage Spec', qty:10.2, unit:'kWh', price:40000, remark:'Battery Specialists', highlight:false },
         { item:'System Testing, Commissioning & Handover', desc:'Inverter Tuning, Cloud WiFi Setup & Safety Inspection', spec:'Full Testing & Handover', qty:1, unit:'Set', price:650000, remark:'Testing Inspection & 1-Year Free Service', highlight:false },
       ]},
@@ -1700,8 +2014,8 @@ const SYSTEM_PRESETS = {
         { item:'uPVC / Metal Conduits & Fittings', desc:'Heavy Duty Protection Conduits, Glands & Trunking', spec:'Fire Retardant Class Heavy Duty', qty:1, unit:'Lot', price:550000, remark:'Estimated On Site Usage', highlight:true },
         { item:'Main DB AC Integration & Breakers', desc:'High Breaking Capacity 40A-63A Breaker & Sync', spec:'Industrial Grade Breakers', qty:1, unit:'Lot', price:625000, remark:'Estimated On Site Usage', highlight:true },
       ]},
-      { name: 'Installation & Technical Commissioning', items: [
-        { item:'EV Charger Fast Charging Power Capacity Labor', desc:'High Current AC Power Cabling, Protection DB & Conduit Dressing', spec:'7kW / 22kW Fast Charger Spec', qty:7, unit:'kW', price:162500, remark:'Certified EV Technicians', highlight:false },
+      { name: 'Installation & Engineering', items: [
+        { item:'EV Fast Charger Power Cabling & Setup', desc:'High Current AC Power Cabling, Protection DB & Conduit Dressing', spec:'7kW / 22kW Fast Charger Spec', qty:7, unit:'kW', price:162500, remark:'Certified EV Technicians', highlight:false },
         { item:'Dedicated Earthing Grounding & Safety Testing', desc:'TT/TN Grounding Rod Installation, Earth Resistance Measurement', spec:'Earth Resistance < 4 Ohms Spec', qty:1, unit:'Lot', price:350000, remark:'Safety Compliance', highlight:false },
         { item:'Smart Cloud App, RFID & Safety Commissioning', desc:'WiFi/4G App Pairing, RFID Card Programming & Handover', spec:'Full Testing & User Training', qty:1, unit:'Set', price:350000, remark:'Aye Yeik Nyo Certified', highlight:false },
       ]},
@@ -1716,7 +2030,7 @@ const SYSTEM_PRESETS = {
     projectDesc: '5.5HP (4kW) Solar Deep Well Submersible Pumping & VFD Irrigation System Installation',
     sections: [
       { name: 'Solar Generator & Pumping Machinery', items: [
-        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:11, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
+        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:11, unit:'Pcs', price:645000, remark:'10-12 Years Warranty', highlight:false },
         { item:'Solar Pump VFD Inverter', desc:'INVT / Veichi / Hicon Solar MPPT Pump Inverter', spec:'5.5kW (7.5HP) 3-Phase 380V Smart MPPT', qty:1, unit:'Unit', price:2350000, remark:'2-3 Years Warranty', highlight:false },
         { item:'Submersible Deep Well Pump', desc:'Stainless Steel Multi-stage Borehole Pump & Motor', spec:'5.5HP (4kW) 380V / Head 120m-180m', qty:1, unit:'Set', price:3850000, remark:'1-2 Years Warranty', highlight:false },
         { item:'Solar VFD Control & Protection DB', desc:'Outdoor Weatherproof Control Cabinet', spec:'1000V DC SPD, DC MCB, AC Breaker & Water Sensors', qty:1, unit:'Set', price:950000, remark:'Automatic Level Control', highlight:false },
@@ -1729,8 +2043,8 @@ const SYSTEM_PRESETS = {
         { item:'Wellhead Flange & Pressure Pipe Fitting', desc:'Heavy Duty Wellhead Assembly & Non-Return Valve', spec:'2.5 inch / 3 inch High Pressure Set', qty:1, unit:'Set', price:650000, remark:'Estimated On Site Usage', highlight:true },
         { item:'Deep Earth Grounding & Lightning Kit', desc:'Copper Earth Rod & Lightning Surge Protection', spec:'Earth Resistance < 5 Ohms', qty:1, unit:'Lot', price:450000, remark:'Estimated On Site Usage', highlight:true },
       ]},
-      { name: 'Installation & Pumping Engineering', items: [
-        { item:'Solar Array Ground Structure Mounting Labor', desc:'6.7kWp Ground Structure & DC Pumping Array Wiring', spec:'6.7kWp Solar Array Spec', qty:6765, unit:'Wp', price:250, remark:'Certified Team', highlight:false },
+      { name: 'Installation & Engineering', items: [
+        { item:'Solar Array Ground Structure Mounting', desc:'6.7kWp Ground Structure & DC Pumping Array Wiring', spec:'6.7kWp Solar Array Spec', qty:6765, unit:'Wp', price:250, remark:'Certified Team', highlight:false },
         { item:'Solar VFD Controller Mounting & Wiring', desc:'5.5kW VFD Panel Mounting, DC/AC Switchgear & Protections', spec:'5.5kW VFD Spec', qty:5.5, unit:'kW', price:150000, remark:'VFD Specialists', highlight:false },
         { item:'Pump Lowering, Water Pipe Assembly & Wellhead', desc:'Borehole Well Lowering, Submersible Cable Splicing & Pipes', spec:'5.5HP Submersible Pump Spec', qty:5.5, unit:'HP', price:175000, remark:'Pumping Engineering Team', highlight:false },
         { item:'System Calibration, Water Flow Testing & Handover', desc:'Water Level Sensor Tuning, Dry-run Protection & Flow Testing', spec:'Full Testing & Handover', qty:1, unit:'Set', price:750000, remark:'Testing Certificate & Training', highlight:false },
@@ -1769,7 +2083,7 @@ const SYSTEM_PRESETS = {
     projectDesc: '18.4kWp / 15kW 3-Phase Hybrid Solar Energy Storage System Installation for Commercial Facility',
     sections: [
       { name: 'Commercial Equipment & Power Storage', items: [
-        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:30, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
+        { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:30, unit:'Pcs', price:645000, remark:'10-12 Years Warranty', highlight:false },
         { item:'Hybrid Inverter', desc:'Deye / Sandi / Luxpower 3-Phase Hybrid Inverter', spec:'15kW / 20kW 3-Phase 380V', qty:1, unit:'Unit', price:9200000, remark:'3-5 Years Manufacturer Warranty', highlight:false },
         { item:'Lithium Battery Storage', desc:'LiFePO4 Commercial Energy Storage Bank', spec:'51.2V 200Ah x 2 Units (20.48kWh)', qty:2, unit:'Unit', price:8800000, remark:'3-5 Years Warranty', highlight:false },
         { item:'Commercial Solar Combiner & DB', desc:'Heavy Duty 3-Phase Solar Protection DB', spec:'1000V DC SPD, 3P DC MCB, 63A AC SPD & Breakers', qty:1, unit:'Set', price:2500000, remark:'Industrial Protection Enclosure', highlight:false },
@@ -1782,9 +2096,9 @@ const SYSTEM_PRESETS = {
         { item:'uPVC / Metal Conduits & Cable Trays', desc:'Heavy Duty Conduits, Trays & Cable Ladder', spec:'Industrial Standard', qty:1, unit:'Lot', price:1700000, remark:'Estimated On Site Usage', highlight:true },
         { item:'3-Phase AC Distribution & ATS Panel', desc:'3-Phase 100A Automatic Transfer Switch & Cabling', spec:'Main Switchboard Integration', qty:1, unit:'Lot', price:2375000, remark:'Estimated On Site Usage', highlight:true },
       ]},
-      { name: 'Engineering, Installation & Commissioning', items: [
-        { item:'Commercial Solar Array Mounting Labor', desc:'Commercial Roof / Shed Mounting & DC String Cabling', spec:'18.4kWp Array Spec', qty:18450, unit:'Wp', price:250, remark:'Senior Technical Team', highlight:false },
-        { item:'3-Phase Inverter & Main Distribution Labor', desc:'15kW/20kW 3-Phase Inverter, AC ATS & Cable Trays', spec:'15kW Inverter Spec', qty:15, unit:'kW', price:112500, remark:'Senior Electrical Engineers', highlight:false },
+      { name: 'Installation & Engineering', items: [
+        { item:'Commercial Solar Array Mounting', desc:'Commercial Roof / Shed Mounting & DC String Cabling', spec:'18.4kWp Array Spec', qty:18450, unit:'Wp', price:250, remark:'Senior Technical Team', highlight:false },
+        { item:'3-Phase Inverter & Main Distribution Setup', desc:'15kW/20kW 3-Phase Inverter, AC ATS & Cable Trays', spec:'15kW Inverter Spec', qty:15, unit:'kW', price:112500, remark:'Senior Electrical Engineers', highlight:false },
         { item:'Commercial Battery Bank Assembly & Balancing', desc:'20.48kWh Dual Unit Rack Assembly & Heavy Busbars', spec:'20.48kWh Storage Spec', qty:20.5, unit:'kWh', price:35000, remark:'Battery Engineering Specialists', highlight:false },
         { item:'Commercial System Testing & Handover', desc:'3-Phase Grid Synchronization, Protection Calibration & Training', spec:'Full Commissioning & Certificate', qty:1, unit:'Set', price:1250000, remark:'1-Year Free Inspection', highlight:false },
       ]},
@@ -1831,7 +2145,7 @@ function resetAutoSystemTitle() {
 function defaultData() {
   return [
     { name: 'Main Equipment & Inverter / Battery System', items: [
-      { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono (~1,050 MMK/W)', qty:12, unit:'Pcs', price:645000, remark:'10-12 Years Warranty (990-1100 MMK/W)', highlight:false },
+      { item:'Solar Panel', desc:'Jinko / Longi / JA Solar N-Type TOPCon', spec:'615W High Efficiency Mono', qty:12, unit:'Pcs', price:645000, remark:'10-12 Years Warranty', highlight:false },
       { item:'Hybrid Inverter', desc:'Deye / Luxpower / Sandi Hybrid Inverter', spec:'8kW Single / Three Phase', qty:1, unit:'Unit', price:4600000, remark:'3-5 Years Manufacturer Warranty', highlight:false },
       { item:'Lithium Battery Storage', desc:'LiFePO4 Solar Energy Storage (Smart BMS)', spec:'51.2V 200Ah (10.24kWh)', qty:1, unit:'Unit', price:8800000, remark:'3-5 Years Warranty', highlight:false },
       { item:'Main DC / AC Protection DB', desc:'Aye Yeik Nyo Solar Protection DB', spec:'1000V DC SPD, DC MCB, AC SPD & Breakers', qty:1, unit:'Set', price:1250000, remark:'Dual Layer Protection Enclosure', highlight:false },
@@ -1844,9 +2158,9 @@ function defaultData() {
       { item:'uPVC Conduits & Accessories', desc:'Heavy Duty Conduits, Flexible Pipes & Trunking', spec:'Fire Retardant Class 8.5/13.5', qty:1, unit:'Lot', price:950000, remark:'Estimated On Site Usage', highlight:true },
       { item:'AC Distribution & Changeover ATS', desc:'Automatic / Manual ATS (63A) & AC Cabling', spec:'Main DB Interlocking & Load Distribution', qty:1, unit:'Lot', price:1300000, remark:'Estimated On Site Usage', highlight:true },
     ]},
-    { name: 'Installation & Engineering Labor', items: [
-      { item:'Solar Array Installation & Mounting Labor', desc:'Mechanical Rail Assembly & DC String Wiring', spec:'Rooftop PV Mounting Spec', qty:7380, unit:'Wp', price:300, remark:'Certified Solar Technicians', highlight:false },
-      { item:'Inverter & AC DB Interconnection Labor', desc:'Inverter Mounting, AC DB Wiring & Grid Sync', spec:'8kW Hybrid Inverter Spec', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
+    { name: 'Installation & Engineering', items: [
+      { item:'Solar Array Installation & Mounting', desc:'Mechanical Rail Assembly & DC String Wiring', spec:'Rooftop PV Mounting Spec', qty:7380, unit:'Wp', price:300, remark:'Certified Solar Technicians', highlight:false },
+      { item:'Inverter & AC DB Interconnection', desc:'Inverter Mounting, AC DB Wiring & Grid Sync', spec:'8kW Hybrid Inverter Spec', qty:8, unit:'kW', price:125000, remark:'Electrical Engineers', highlight:false },
       { item:'Battery Storage Bank Assembly & BMS Setup', desc:'LiFePO4 Rack Assembly, High-Current DC & BMS Link', spec:'10.24kWh Storage Spec', qty:10.2, unit:'kWh', price:40000, remark:'Battery Specialists', highlight:false },
       { item:'System Testing, Commissioning & Handover', desc:'Inverter Tuning, Cloud WiFi Setup & Safety Inspection', spec:'Full Testing & Handover', qty:1, unit:'Set', price:650000, remark:'Testing Inspection & 1-Year Free Service', highlight:false },
     ]},
