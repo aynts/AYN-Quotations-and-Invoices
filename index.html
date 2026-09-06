@@ -4021,7 +4021,10 @@ function getMsalInstance() {
   _msalInstance = new msal.PublicClientApplication({
     auth: {
       clientId: AYN_CLOUD_CLIENT_ID,
-      authority: 'https://login.microsoftonline.com/common',
+      // 'consumers'  → personal Microsoft accounts (Outlook, OneDrive personal, Xbox)
+      // 'organizations' → work/school Microsoft accounts only
+      // 'common'     → both (requires multi-tenant enabled in Azure Portal)
+      authority: 'https://login.microsoftonline.com/consumers',
       redirectUri: redirectUri
     },
     cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: false }
