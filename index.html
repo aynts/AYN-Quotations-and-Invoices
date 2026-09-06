@@ -10,8 +10,8 @@
   <!-- External Libraries (jsPDF and AutoTable for client-side PDF export) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
-  <!-- MSAL.js 2.0 - Microsoft Authentication Library for Browser SPA (Auth Code + PKCE) -->
-  <script src="https://alcdn.msauth.net/browser/2.39.0/js/msal-browser.min.js"></script>
+  <!-- MSAL.js 2.39.0 via jsDelivr CDN (Auth Code + PKCE for SPA) -->
+  <script src="https://cdn.jsdelivr.net/npm/@azure/msal-browser@2.39.0/lib/msal-browser.min.js" crossorigin="anonymous"></script>
 
   <style>
 /* =========================================================
@@ -4012,7 +4012,10 @@ let _cloudDocsCache = [];
 function getMsalInstance() {
   if (_msalInstance) return _msalInstance;
   if (AYN_CLOUD_CLIENT_ID === 'YOUR_CLIENT_ID_HERE') return null;
-  if (typeof msal === 'undefined') { console.warn('MSAL not loaded'); return null; }
+  if (typeof msal === 'undefined') {
+    console.error('MSAL library failed to load from CDN.');
+    return null;
+  }
   // Redirect URI must exactly match what is registered in Azure App Registration
   const redirectUri = 'https://aynts.github.io/AYN-Quotations-and-Invoices/';
   _msalInstance = new msal.PublicClientApplication({
@@ -4075,6 +4078,10 @@ function updateCloudUi() {
 }
 
 async function cloudOneDriveToggle() {
+  if (typeof msal === 'undefined') {
+    alert('Microsoft Authentication Library (MSAL) failed to load.\n\nPlease check your internet connection and reload the page.\n\nIf the problem persists, try a hard refresh (Ctrl+Shift+R).');
+    return;
+  }
   const msalInst = getMsalInstance();
   if (!msalInst) {
     alert('Microsoft OneDrive Cloud is not configured yet.\n\nTo enable it:\n1. Register an app at https://entra.microsoft.com\n2. Set AYN_CLOUD_CLIENT_ID at the top of the cloud module script.\n3. Serve this file over HTTP (not file://).');
