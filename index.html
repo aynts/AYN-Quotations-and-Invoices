@@ -4001,7 +4001,7 @@ function downloadPdf() {
 // Platform: Single-page application (SPA)
 // Redirect URI: the URL this file is served from (e.g. http://127.0.0.1:5500/index.html)
 // Permissions: Files.ReadWrite + User.Read (Delegated)
-const AYN_CLOUD_CLIENT_ID = 'YOUR_CLIENT_ID_HERE';
+const AYN_CLOUD_CLIENT_ID = '1041e0fc-14e9-4c92-86d9-14e91ed78202';
 const AYN_CLOUD_ROOT_FOLDER = 'AYN_QuotationsInvoices';
 const GRAPH_BASE = 'https://graph.microsoft.com/v1.0';
 
@@ -4013,11 +4013,13 @@ function getMsalInstance() {
   if (_msalInstance) return _msalInstance;
   if (AYN_CLOUD_CLIENT_ID === 'YOUR_CLIENT_ID_HERE') return null;
   if (typeof msal === 'undefined') { console.warn('MSAL not loaded'); return null; }
+  // Redirect URI must exactly match what is registered in Azure App Registration
+  const redirectUri = 'https://aynts.github.io/AYN-Quotations-and-Invoices/';
   _msalInstance = new msal.PublicClientApplication({
     auth: {
       clientId: AYN_CLOUD_CLIENT_ID,
       authority: 'https://login.microsoftonline.com/common',
-      redirectUri: window.location.origin + window.location.pathname
+      redirectUri: redirectUri
     },
     cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: false }
   });
