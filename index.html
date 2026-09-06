@@ -4001,7 +4001,7 @@ function downloadPdf() {
 // Platform: Single-page application (SPA)
 // Redirect URI: the URL this file is served from (e.g. http://127.0.0.1:5500/index.html)
 // Permissions: Files.ReadWrite + User.Read (Delegated)
-const AYN_CLOUD_CLIENT_ID = '1041e0fc-14e9-4c92-86d9-14e91ed78202';
+const AYN_CLOUD_CLIENT_ID = '78c57dd8-cdf0-46ea-bf35-84d7701509eb';
 const AYN_CLOUD_ROOT_FOLDER = 'AYN_QuotationsInvoices';
 const GRAPH_BASE = 'https://graph.microsoft.com/v1.0';
 
@@ -4021,10 +4021,8 @@ function getMsalInstance() {
   _msalInstance = new msal.PublicClientApplication({
     auth: {
       clientId: AYN_CLOUD_CLIENT_ID,
-      // 'consumers'  → personal Microsoft accounts (Outlook, OneDrive personal, Xbox)
-      // 'organizations' → work/school Microsoft accounts only
-      // 'common'     → both (requires multi-tenant enabled in Azure Portal)
-      authority: 'https://login.microsoftonline.com/consumers',
+      // 'common' allows both personal and work/school Microsoft accounts
+      authority: 'https://login.microsoftonline.com/common',
       redirectUri: redirectUri
     },
     cache: { cacheLocation: 'sessionStorage', storeAuthStateInCookie: false }
